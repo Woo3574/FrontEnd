@@ -34,6 +34,7 @@ while (true) {
 const genderCode = jumin.charAt(7);
 const birthYearPrefix = genderCode === "1" || genderCode === "2" ? "19" : "20";
 const birthYear = Number(birthYearPrefix + jumin.substring(0, 2));
+const currentYear = new Date().getFullYear();
 const age = currentYear - birthYear;
 const genderStr = genderCode === "1" || genderCode === "3" ? "남성" : "여성";
 
