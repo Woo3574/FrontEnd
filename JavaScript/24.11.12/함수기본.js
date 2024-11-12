@@ -106,3 +106,39 @@ function initScreen() {
 
 // Callback 함수 : 함수의 인자로 다른 함수를 전달하여, 그함수가 실행될 때 호출되는 함수
 // 주로 비동기 처리나 사용자 이벤트 처리에 사용
+// 함수를 매개변수로 넘기기
+
+function birdSing() {
+  console.log("🐦 새가 즐겁게 노래합니다!");
+}
+
+function catCry() {
+  console.log("😿 고양이가 슬프게 웁니다.");
+}
+
+function dogDance() {
+  console.log("🐶 강아지가 신나게 춤을 춥니다!");
+}
+
+// 일반 함수로 호출
+// function checkAnimalMood(mood) {
+//   if (mood === "happy") birdSing();
+//   else if (mood === "sad") catCry();
+//   else dogDance("happy");
+// }
+
+// checkAnimalMood("happy");
+// checkAnimalMood("sad");
+
+// 콜백 함수로 구현
+function checkAnimalMoodCallback(mood, happyAction, sadAction) {
+  if (mood === "happy") happyAction(); //함수를 호출할때 괄호
+  else if (mood === "sad") sadAction();
+}
+// 함수를 출력할때는 괄호o, 등록할땐 괄호x
+checkAnimalMoodCallback("happy", dogDance, catCry); //함수를 등록만하기때문에 괄호가 없음
+// () => console.log("🧚‍♀️슬프다")와 같은 화살표 함수는 간결하고 직관적인 문법을 제공하며,
+// 단기적인 작업(이 경우 슬픔을 로그로 출력하는 동작)을 정의하는 데 유용합니다.
+checkAnimalMoodCallback("sad", dogDance, () => console.log("🧚‍♀️슬프다")); // 재사용성이 있을것같으면 함수로만들어서 사용해야한다.
+
+// 타이머 설정과 Callback 함수
