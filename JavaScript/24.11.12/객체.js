@@ -64,3 +64,54 @@ const Profile = [
     ],
   },
 ];
+
+console.log(Profile);
+
+// 객체 속성 동적 추가하기
+// 객체 속성에 키로 접근해 값을 재할당하면 기존 속성값을 변경 할 수 있음
+// 키가 없는 경우, 키와 값으로 구성된 새로운 속성이 객체로 추가
+const carInfo = {};
+carInfo.name = "BMW X6";
+carInfo.year = "2023/04/15";
+carInfo.maxSpeed = "250Km";
+
+delete carInfo.maxSpeed;
+console.log(carInfo);
+
+// 생성자 : 자바스크립트에서는 클래스 대신 함수를 생성자를 통해서 객체로 만들 수있음
+function Person(name, age, addr) {
+  this.name = name;
+  this.age = age;
+  this.addr = addr;
+  this.info = function () {
+    return `이름: ${this.name}, 나이: ${this.age}, 주소: ${this.addr}`;
+  };
+}
+
+// const person1 = new Person("안유진", 21, "서울시 강남구 역삼동");
+// const person2 = new Person("장원영", 20, "서울시 강남구 청담동");
+// const person3 = new Person("이서", 18, "서울시 강남구 삼성동");
+
+// console.log(person1.info());
+// console.log(person2.info());
+// console.log(person3.info());
+
+// 클래스 방식
+class Person {
+  constructor(name, age, addr) {
+    this.name = name;
+    this.age = age;
+    this.addr = addr;
+  }
+  info() {
+    return `이름: ${this.name}, 나이: ${this.age}, 주소: ${this.addr}`;
+  }
+}
+
+const person1 = new Person("안유진", 21, "서울시 강남구 역삼동");
+const person2 = new Person("장원영", 20, "서울시 강남구 청담동");
+const person3 = new Person("이서", 18, "서울시 강남구 삼성동");
+
+console.log(person1.info());
+console.log(person2.info());
+console.log(person3.info());
