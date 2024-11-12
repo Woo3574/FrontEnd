@@ -3,6 +3,7 @@ function Counter() {
   let counter = 0;
   return {
     // 'increment' 메소드는 클로저를 통해 'count' 변수에 접근할 수 있습니다.
+    // key : value
     increment: function () {
       count++;
       console.log(count);
@@ -24,3 +25,23 @@ myCounter.decrement(); // 출력: 1
 
 // 'count' 변수는 외부에서 직접 접근할 수 없습니다.
 console.log(myCounter.count); // 출력: undefined
+
+class Counter {
+  constructor() {
+    this.count = 0;
+  }
+
+  increment() {
+    this.increment = 0;
+    console.log(this.count);
+  }
+  decrement() {
+    this.decrement = 0;
+    console.log(this.count);
+  }
+}
+
+const counter = new Counter();
+counter.increment();
+counter.increment();
+counter.decrement();
