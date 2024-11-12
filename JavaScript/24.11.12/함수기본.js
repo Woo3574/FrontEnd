@@ -142,3 +142,24 @@ checkAnimalMoodCallback("happy", dogDance, catCry); //함수를 등록만하기�
 checkAnimalMoodCallback("sad", dogDance, () => console.log("🧚‍♀️슬프다")); // 재사용성이 있을것같으면 함수로만들어서 사용해야한다.
 
 // 타이머 설정과 Callback 함수
+const buyToy = (item, price, quantity, callback) => {
+  console.log(
+    "🧒 아이가 '" +
+      item +
+      "' 장난감을 " +
+      quantity +
+      "개 골라서 엄마에게 가져갔습니다."
+  );
+  setTimeout(() => {
+    console.log("💰 계산이 필요합니다.");
+    let total = price * quantity;
+    callback(total);
+  }, 2000);
+};
+
+const pay = (total) => {
+  console.log("엄마: '지불할 금액은 " + total + "원입니다.'");
+  console.log("🧒 아이: '와! 고마워요, 엄마!' 🎉");
+};
+
+buyToy("공룡 장난감", 3000, 3, pay);
