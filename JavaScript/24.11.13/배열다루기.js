@@ -42,3 +42,13 @@ console.log(fruits);
 // 배열의 요소 변경
 fruits[3] = "Peach";
 console.log(fruits);
+
+// concat() : 2개 이상의 배열을 하나의 배열로 결합 (비파괴적인 메서드)
+const arrCar1 = ["코나", "아반떼", "소나타"];
+const arrCar2 = ["싼타페", "그랜저", "캐스퍼"];
+
+const newCar = arrCar1.concat(arrCar2);
+console.log(newCar);
+
+const newCar2 = [...arrCar1, ...arrCar2];
+console.log(newCar2);
