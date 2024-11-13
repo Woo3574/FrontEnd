@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="box-1">
+      <p class="text">text-1</p>
+      <p class="text">text-2</p>
+      <p class="text">text-3</p>
+    </div>
+    <div class="box-2">
+      <p class="text">text-4</p>
+      <p class="text">text-5</p>
+      <p class="text">text-6</p>
+    </div>
+    <p id="title">Hello,<span style="display: none">javaScript!!!</span></p>
+    <script>
+      // querySelector("CSS선택자")
+      // const el = document.querySelector(".box-1");
+      const el = document.querySelector(".box-2 .text:nth-of-type(3)");
+      el.style.fontSize = "2em";
+      el.style.color = "red";
+      el.innerHTML = "해당태그의 내용을 변경 합니다.";
+      const title1 = document.getElementById("title").textContent;
+      const title2 = document.getElementById("title").innerText;
+      const title3 = document.getElementById("title").innerHTML;
+      console.log(title1);
+      console.log(title2);
+      console.log(title3);
+    </script>
+  </body>
+</html>
