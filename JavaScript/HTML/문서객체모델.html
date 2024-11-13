@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="title">title</h1>
+    <p class="text">text-1</p>
+    <p class="text">text-2</p>
+    <script>
+      // id속성값과 일치하는 요소들 1개만 선택
+      const el = document.getElementById("title");
+      console.log(el);
+      // class 속성값과 일치하는 모든 요소를 선택
+      const classEl = document.getElementsByClassName("text");
+      // console.log(classEl);
+
+      // for (let e of classEl) {
+      //   console.log(e);
+      // }
+
+      classEl.array.forEach((e) => {
+        console.log(e);
+      });
+    </script>
+  </body>
+</html>
