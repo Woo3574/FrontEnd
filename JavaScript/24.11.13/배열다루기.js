@@ -50,5 +50,48 @@ const arrCar2 = ["싼타페", "그랜저", "캐스퍼"];
 const newCar = arrCar1.concat(arrCar2);
 console.log(newCar);
 
-const newCar2 = [...arrCar1, ...arrCar2];
+const newCar2 = [...arrCar1, ...arrCar2, "GV80"];
 console.log(newCar2);
+
+// slice() :
+const newCar3 = newCar2.slice(3);
+console.log(newCar3);
+console.log(newCar3.sort());
+
+// filter() :  배열에서 특정조건을 만족하는 배열의 요소만 찾아서 새로운 배열로 반환
+// async adadwaasda() {
+//   response = await axios.get(dawdwadasdwacx);
+//   response.data
+// }
+
+const persons = [
+  {
+    name: "유재석",
+    point: 78,
+    city: "서울",
+  },
+  {
+    name: "김종국",
+    point: 92,
+    city: "서울",
+  },
+  {
+    name: "양세찬",
+    point: 76,
+    city: "제주",
+  },
+  {
+    name: "하하",
+    point: 81,
+    city: "인천",
+  },
+];
+
+const pass = persons.filter((e) => e.point > 80);
+console.log(pass);
+
+// map은 모든 요소를 반환하고,filter는 조건에 부합하는것만 반환
+// map() : 배열의 각 요소를 변환하고, 그 결과로 새로운 배열을 반환
+const numbers = [1, 2, 3, 4, 5];
+const squareN = numbers.map((e) => e * e); // 제곱한 결과를 반환
+console.log(squareN);
