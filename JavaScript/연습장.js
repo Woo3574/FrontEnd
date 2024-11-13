@@ -51,3 +51,17 @@ const pay = (total) => {
 };
 
 sell(2500, 2, "010-7126-3574", pay);
+
+//배열
+const arr = [1, 2, 3, 4, 5];
+arr.forEach((e) => {
+  console.log(e);
+});
+
+for (let i = 0; i < arr.length; i++) {
+  console.log(arr[i]);
+}
+
+for (let e of arr) {
+  console.log(e);
+}
