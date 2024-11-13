@@ -15,3 +15,12 @@ console.log(Number.parseFloat("문자열12")); // NaN
 // Number.parseInt() : 주어진 문자열을 정수로 변환
 
 console.log(Number.parseInt("12.34"));
+
+const z = 10;
+console.log(typeof z);
+
+const zx = "'";
+console.log(typeof zx);
+
+console.log(Number.parseFloat("15.23"));
+console.log(Number.parseInt("15.23"));

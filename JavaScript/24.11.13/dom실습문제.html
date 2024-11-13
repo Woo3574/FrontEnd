@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .div {
+        color: red;
+      }
+    </style>
+  </head>
+  <body></body>
+  <script>
+    //div
+    const divEl = document.createElement("div");
+    document.body.append(divEl);
+    divEl.innerText = "Bmw 판매장";
+    //span
+    const
+    const ulEl = document.createElement("ul");
+    const menuItems = ["x2", "x3", "x4", "x5", "x6"];
+    menuItems.forEach((item) => {
+      const liEl = document.createElement("li");
+      liEl.textContent = item;
+      ulEl.appendChild(liEl);
+    });
+    divEl.appendChild(ulEl);
+  </script>
+</html>

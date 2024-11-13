@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="https://google.co.kr">구글</a>
+    <script>
+      const el = document.querySelector("a");
+      const href = el.getAttribute("herf"); // 속성명 선택
+      console.log(href);
+      el.setAttribute("href", "https://kakao.com");
+      el.innerText = "카카오";
+    </script>
+  </body>
+</html>

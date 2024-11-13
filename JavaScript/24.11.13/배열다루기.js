@@ -7,14 +7,28 @@ arr.forEach((e) => {
   console.log(e);
 });
 
+const arr1 = [10, 11, 12, 13, 14, 15];
+arr1.forEach((e) => {
+  console.log(e);
+});
+
 for (let i = 0; i < arr.length; i++) {
   console.log(arr[i]);
 }
 
+const arr2 = [10, 11, 12, 13, 14, 15];
+for (let i = 0; i < arr2.length; i++) {
+  console.log(arr2[i]);
+}
 // 리터러블(반복) 객체의 요소를 순회할 때 사용
 for (let e of arr) {
   console.log(e);
 }
+const arr3 = [10, 11, 12, 13, 14, 15];
+for (let e of arr3) {
+  console.log(e);
+}
+console.log(arr3.toString());
 
 // toString() : 배열 안의 모든 문자열을 쉼표를 이용해 모두 결합해 하나의 문자열로 반환
 console.log(arr.toString());
@@ -24,6 +38,8 @@ console.log(arr.toString());
 const fruits = ["Apple", "Banana", "Orange", "Kiwi", "Mango"];
 console.log(fruits.join("*"));
 
+const animal = ["사자", "호랑이", "고양이", "강아지", "낙타"];
+console.log(animal.join("?"));
 // pop() : 스택 자료 구조에서 마지막 데이터를 제거하고, 반환, 배열의 내용이 변경됨으로 파괴적 메서드
 console.log(fruits.pop());
 
