@@ -11,11 +11,15 @@
     <p>text-3</p>
     <script>
       const pEls = document.querySelectorAll("p");
-      pEls.forEach(el => {
-        el.addEventListener("click", function() {
-          if
-        })
-      })
+      pEls.forEach((el) => {
+        el.addEventListener("click", () => {
+          if (el.style.color === "red") {
+            el.style.color = "black";
+          } else {
+            el.style.color = "red";
+          }
+        });
+      });
     </script>
   </body>
 </html>
