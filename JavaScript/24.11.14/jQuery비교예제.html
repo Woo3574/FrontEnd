@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #container {
+        width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: orange;
+      }
+      button {
+        font-size: 18px;
+        padding: 10px 20px;
+        background-color: #333;
+        color: white;
+        cursor: pointer;
+
+        border: 1px solid white;
+        border-radius: 10px;
+        box-shadow: 2px 2p 2px black;
+      }
+      button:active {
+        transform: translateX(2px) translateY(2px);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <button id="colorBtn">Change Background Color</button>
+    </div>
+    <script>
+      const colorBtn = document.getElementById("colorBtn");
+      const colors = ["red", "orange", "yellow", "blue", "navy", "purple"];
+      let idx = 0;
+      colorBtn.addEventListener("click", () => {
+        document.getElementById("container").style.backgroundColor =
+          colors[idx];
+        idx = (idx + 1) % colors.length; // 색깔 반복순회
+      });
+    </script>
+  </body>
+</html>
