@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #container {
+        width: 450px;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        margin: 10px auto;
+      }
+      #button {
+        width: 100%;
+        height: 12%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        flex-direction: row;
+        margin-bottom: 30px;
+        gap: 5px;
+      }
+
+      .btn {
+        width: 100%;
+        height: 100%;
+        gap: 30px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+      }
+
+      .green {
+        background-color: green;
+      }
+
+      .orange {
+        background-color: orange;
+      }
+
+      .purple {
+        background-color: purple;
+      }
+
+      #background-box {
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        border: 1px solid #aaa;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="button">
+        <div class="btn green" onclick="changeBG('green')">Green</div>
+        <div class="btn orange" onclick="changeBG('orange')">Orange</div>
+        <div class="btn purple" onclick="changeBG('purple')">Purple</div>
+      </div>
+      <div id="background-box"></div>
+    </div>
+    <script>
+      function changeBG(color) {
+        const box = document.querySelector("#background-box");
+        box.style.backgroundColor = color;
+      }
+    </script>
+  </body>
+</html>
