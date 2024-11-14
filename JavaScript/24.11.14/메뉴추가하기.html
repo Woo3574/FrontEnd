@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="menu">메뉴리스트</div>
+    <script>
+      let menuEl = document.querySelector("#menu");
+      // ul 태그 생성
+      const menuList = document.createElement("ul");
+      // li태그 생성
+      const item1 = document.createElement("li");
+      const item2 = document.createElement("li");
+      const item3 = document.createElement("li");
+      const item4 = document.createElement("li");
+
+      menuList.appendChild(item1);
+      menuList.appendChild(item2);
+      menuList.appendChild(item3);
+      menuList.appendChild(item4);
+
+      menuEl.appendChild(menuList);
+
+      item1.innerText = "코나";
+      item2.innerText = "셀토스";
+      item3.innerText = "EV3";
+      item4.innerText = "트랙스";
+      item5.innerText = "i30";
+    </script>
+  </body>
+</html>
