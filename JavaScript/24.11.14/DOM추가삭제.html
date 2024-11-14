@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      #container {
+        width: 500px;
+        margin: 20px auto;
+        padding: 20px;
+      }
+      input[type="text"] {
+        width: 370px;
+        float: left;
+        height: 30px;
+        padding-left: 30px;
+      }
+      button {
+        width: 90px;
+        height: 30px;
+        float: right;
+        background: #222;
+        color: #fff;
+        border: none;
+      }
+      hr {
+        clear: both;
+        display: none;
+      }
+      ul {
+        list-style: none;
+        padding-top: 50px;
+      }
+      li {
+        line-height: 2.5;
+      }
+      li:hover {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>DOM 추가/삭제</h1>
+      <p>공부할 과목을 기록해 보세요.</p>
+      <p>공부가 끝난 과목은 클릭해서 삭제할 수 있습니다.</p>
+      <input type="text" id="subject" autofocus />
+      <button onclick="newRegister();">추가</button>
+      <hr />
+      <ul id="itemList"></ul>
+      <script>
+        function newRegister() {
+          // 해당하는 input 요소를 찾음
+          const subject = document.querySelector("#subject");
+
+          // 새로운 항목을 추가하기 위해 li 태그 생성
+          const newItem = document.createElement("li");
+          newItem.innerText = subject.value;
+          subject.value = ""; // 창 비우기
+          // 생성된 li 태그를 추가 하기 위해 부모 태그를 선택
+          const itemList = document.querySelector("#itemList");
+          itemList.insertBefore(newItem, itemList.childNodes[0]);
+
+          // 해당 아이템 더블클릭시 삭제하기
+          newItem.addEventListener("dblclick", () => {
+            itemList.removeChild(newItem);
+          });
+        }
+      </script>
+    </div>
+  </body>
+</html>
