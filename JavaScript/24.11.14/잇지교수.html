@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      #container {
+        width: 500px;
+        margin: 20px auto;
+        position: relative;
+      }
+      img {
+        width: 100%;
+        background-size: cover;
+      }
+      button {
+        background-color: rgba(255, 255, 255, 0.7);
+        padding: 5px;
+        border: 1px solid #ccc;
+        font-size: 12px;
+        border-radius: 2px;
+      }
+      .over {
+        position: absolute;
+        left: 20px;
+        top: 400px;
+      }
+      .detail {
+        display: none;
+        width: 100%;
+        line-height: 1.8;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <img src="/imges/잇지.jpeg" />
+      <button class="over" id="open" onclick="isDetail(true)">
+        상세 설명 보기
+      </button>
+      <div id="desc" class="detail">
+        <h4>그룹 잇지</h4>
+        <p>
+          팀명 'ITZY'는 '너희가 원하는 거 전부 있지? 있지!' 라는 뜻을 가지고
+          있으며, 정식 한글 표기법은 있지이다. 혹 영어명인 'ITZY'로만 들어본
+          사람들이 한글로는 어떻게 적는지 몰라 '잇지'라고 부르는 경우도 꽤 많이
+          있는데, '있지'라고 불러야 한다며 정정해주는 것이 팬덤 잇지에게는
+          일상이 되었다.
+        </p>
+        <button onclick="isDetail(false)">상세 설명 닫기</button>
+      </div>
+    </div>
+    <script>
+      function isDetail(isDetail) {
+        if (isDetail) {
+          document.querySelector("#desc").style.display = "block";
+          document.querySelector("#open").style.display = "none";
+        } else {
+          document.querySelector("#desc").style.display = "none";
+          document.querySelector("#open").style.display = "block";
+        }
+      }
+    </script>
+  </body>
+</html>
