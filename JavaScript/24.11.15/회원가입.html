@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .containerBlank {
+        margin: 200px auto;
+        width: 493.4px;
+        height: 478.032px;
+        background-color: #f0f0f0;
+        display: flex; /* 내부 콘텐츠를 가운데 정렬 */
+        justify-content: center; /* 수평 가운데 정렬 */
+        align-items: center; /* 수직 가운데 정렬 */
+      }
+
+      .container {
+        background-color: #ffff;
+        border-radius: 5%;
+        width: 85%;
+        height: 90%;
+        z-index: 1;
+        text-align: center;
+      }
+
+      .box {
+        display: flex;
+        flex-direction: column;
+        gap: 17px;
+        margin-top: 5%;
+      }
+
+      .box > input {
+        border-radius: 5px; /* 모서리를 5px 정도 둥글게 */
+        margin: auto 20px;
+        padding: 10px;
+        border: 2px solid #8f8383;
+      }
+
+      .box > input:focus {
+        border-color: rgb(66, 91, 230);
+        outline: none; /* 기본적인 포커스 outline 제거 */
+      }
+
+      .box > button {
+        border-radius: 5px; /* 모서리를 5px 정도 둥글게 */
+        margin: auto 20px;
+        padding: 10px;
+        font-size: 15px;
+        color: #ffff;
+        background-color: #5153da;
+        border: none;
+        cursor: pointer;
+      }
+
+      /* 에러 메시지 스타일 */
+      .error {
+        color: red;
+        font-size: 12px;
+        margin-top: 3px;
+      }
+      /* 유효한 입력에 대한 스타일 (초록색) */
+      .valid {
+        color: green;
+        font-size: 12px;
+        margin-top: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="containerBlank">
+      <div class="container">
+        <div class="box">
+          <h1>회원 가입</h1>
+          <!-- validateInput()은 이 oninput 이벤트가 발생할 때 호출되는 JavaScript 함수입니다. 
+           이 함수는 각 입력 필드에 대한 유효성 검사를 실행하여, 입력값이 조건을 충족하는지 검사하고,
+           그에 맞는 메시지를 화면에 표시하는 역할을 합니다. -->
+          <input
+            type="text"
+            id="id"
+            placeholder="아이디"
+            oninput="validateInput()"
+          />
+          <div id="idError" class="error"></div>
+          <input
+            type="password"
+            id="pwd"
+            placeholder="비밀번호"
+            oninput="validateInput()"
+          />
+          <div id="pwdError" class="error"></div>
+          <input
+            type="email"
+            id="email"
+            placeholder="이메일"
+            oninput="validateInput()"
+          />
+          <div id="emailError" class="error"></div>
+          <input
+            type="text"
+            id="phoneNumber"
+            placeholder="전화번호"
+            oninput="validateInput()"
+          />
+          <div id="phoneNumberError" class="error"></div>
+          <button onclick="submitForm()">가입 요청</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      function validateInput() {
+        // 아이디 유효성 검사
+        // .value : HTML의 입력 필드에서 해당요소의 입력값을 value 속성에 저장하기때문에
+        const id = document.getElementById("id").value;
+        const idError = document.getElementById("idError");
+
+        if (id === "") {
+          idError.textContent = "아이디는 필수 입력 사항입니다.";
+          message.textContent = "아이디는 필수 입력 사항입니다.";
+          idError.classList.remove("valid");
+          idError.classList.add("error");
+        } else if (id.length < 8) {
+          idError.textContent = "아이디는 8자리이상 이어야합니다.";
+          idError.classList.remove("valid");
+          idError.classList.add("error");
+        } else {
+          idError.textContent = "사용 가능한 아이디 입니다.";
+          idError.classList.remove("error");
+          idError.classList.add("valid");
+        }
+
+        // 비밀번호 유효성 검사
+        const pwd = document.getElementById("pwd").value;
+        const pwdError = document.getElementById("pwdError");
+        //정규 표현식에서 **^**는 **"문자열의 시작"**을 나타내는 메타문자입니다.
+        // 이 문자는 패턴이 문자열의 시작 부분에서 일치해야 한다는 의미를 가지고 있습니다.
+
+        //정규 표현식에서 **백슬래시 (\)**는 이스케이프 문자로 사용됩니다.
+        //특정 문자나 기호의 특수한 의미를 피하고 문자 그대로 사용할 수 있도록 도와줍니다.
+        const pwdPattern = /^[a-zA-Z0-9~!@#$%^&*()_-+=]{8,}$/;
+        if (pwdPattern.test(pwd)) {
+          pwdError.textContent =
+            "비밀번호는 8자리 이상,영문,숫자를 조합해야합니다.";
+          pwdError.classList.remove = "valid";
+          pwdError.classList.add = "error";
+        } else {
+          pwdError.textContent = "사용 가능한 비밀번호 입니다.";
+          pwdError.classList.remove("error");
+          pwdError.classList.add("valid");
+        }
+
+        // 이메일 유효성 검사
+        const email = document.getElementById("email").value;
+        const emailError = document.getElementById("emailError");
+        const emailPattern1 = /^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-z]/;
+        const emailPattern2 = /^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-z]+\.[a-z]$/;
+
+        if (!emailPattern1.test(email) || !emailPattern2.test(email)) {
+          emailError.textContent = "유효한 이메일을 입력하세요.";
+          emailError.classList.remove("valid");
+          emailError.classList.add("error");
+        } else {
+          emailError.textContent = "사용 가능한 이메일 입니다.";
+          emailError.classList.remove("error");
+          emailError.classList.add("valid");
+        }
+
+        // 전화번호 유효성 검사
+        const phoneNumber = document.getElementById("phoneNumber").value;
+        const phoneNumberError = document.getElementById("phoneNumberError");
+        const phonePattern = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/;
+
+        if (!phonePattern.test(phoneNumber)) {
+          phoneNumberError.textContent =
+            "전화번호 형식은 000-0000-0000 입니다.";
+          phoneNumberError.classList.remove("valid");
+          phoneNumberError.classList.add("error");
+        } else {
+          phoneNumberError.textContent = "사용 가능합니다.";
+          phoneNumberError.classList.remove("error");
+          phoneNumberError.classList.add("valid");
+        }
+      }
+
+      function submitForm() {
+        // 가입 요청 버튼 클릭 시 유효성 검사 진행 후 가입 처리
+        validateInput();
+        const idError = document.getElementById("idError").textContent;
+        const pwdError = document.getElementById("pwdError").textContent;
+        const emailError = document.getElementById("emailError").textContent;
+        const phoneNumberError =
+          document.getElementById("phoneNumberError").textContent;
+
+        if (!idError && !pwdError && !emailError && !phoneNumberError) {
+          alert("가입이 완료되었습니다!");
+        } else {
+          alert("유효하지 않은 입력이 있습니다. 오류를 수정해주세요.");
+        }
+      }
+    </script>
+  </body>
+</html>
