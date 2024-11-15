@@ -18,3 +18,22 @@ console.log(sum);
 const name = "곰돌이사육사";
 const message = `안녕하세요. ${name}님, 환영합니다.`;
 console.log(message);
+
+// 배열에서 전개 연산자
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const arr3 = [7, 8, 9];
+
+const newArr = [...arr1, ...arr2, ...arr3];
+console.log(newArr);
+
+// 객체에서의 전개 연산자
+const member = {
+  name: "안유진",
+  age: 21,
+  addr: "서울시 강남구 역삼동",
+  position: "리더",
+};
+
+const modifyMember = { ...member, age: 22 };
+console.log(modifyMember);
