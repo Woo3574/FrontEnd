@@ -37,5 +37,5 @@ const JsxSyntax = () => {
     </>
   );
 };
-
+// export 내보내다
 export default JsxSyntax;
