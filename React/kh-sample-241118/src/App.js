@@ -4,6 +4,8 @@ import JsxSyntax from "./24.11.18/JSX문법";
 import GreetingComponent from "./24.11.18/GreetingComponent";
 import WelcomeProps from "./24.11.18/WelcomeProps";
 import Articles from "./24.11.18/Articles";
+import MyComponent from "./24.11.18/MyComponent";
+import BoxComponent from "./24.11.18/BoxComponent";
 
 const productInfo = {
   date: "2024-05-16",
@@ -39,7 +41,10 @@ function App() {
         info={productInfo}
       />
       <hr /> */}
-      <Articles />
+      {/* <Articles /> */}
+      <MyComponent name="안유진" age={21} />
+      <BoxComponent>첫 번째 박스 입니다.</BoxComponent>
+      <BoxComponent>첫 번째 박스 입니다.</BoxComponent>
     </>
   );
 }
