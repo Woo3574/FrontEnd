@@ -10,6 +10,14 @@ import BoxComponent from "./BoxComponent";
 const productInfo = {
   date: "2024-05-16",
   product: "iphonePro",
+  specs: {
+    color: "Space Gray",
+    storage: "256GB",
+    price: {
+      first: 1200,
+      second: 1500,
+    },
+  },
 };
 function App1118() {
   return (
@@ -17,7 +25,7 @@ function App1118() {
       {/* <h1>여기는 App.js 입니다.</h1> */}
       {/* <JsxSyntax />
       <GreetingComponent /> */}
-      {/* <WelcomeProps
+      <WelcomeProps
         name="곰돌이사육사"
         job="개발자"
         addr="경기도수원시"
@@ -31,8 +39,8 @@ function App1118() {
         addr="노잼 도시 대전"
         isAdult={true}
         info={productInfo}
-      /> */}
-      {/* <hr />
+      />
+      <hr />
       <WelcomeProps
         name="장원영"
         job="아이돌"
@@ -40,11 +48,11 @@ function App1118() {
         isAdult={true}
         info={productInfo}
       />
-      <hr /> */}
+      <hr />
       {/* <Articles /> */}
-      <MyComponent name="안유진" age={21} />
+      {/* <MyComponent name="안유진" age={21} />
       <BoxComponent>첫 번째 박스 입니다.</BoxComponent>
-      <BoxComponent>첫 번째 박스 입니다.</BoxComponent>
+      <BoxComponent>첫 번째 박스 입니다.</BoxComponent> */}
     </>
   );
 }

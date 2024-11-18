@@ -28,6 +28,7 @@ const WelcomePropss = ({ name, job, addr, isAdult, info }) => {
 };
 
 const WelcomePropsss = (props) => {
+  // 객체 디스트럭처링을 통해 props 객체에서 필요한 속성들만 추출
   const { name, job, addr, isAdult, info } = props;
   return (
     <>
@@ -35,9 +36,9 @@ const WelcomePropsss = (props) => {
       <p>직업 : {job}</p>
       <p>주소 : {addr}</p>
       {isAdult ? <p>성인 입니다.</p> : <p>미성년자 입니다.</p>}
-      <p>정보 : {info.product}</p>
+      <p>정보 : {info.specs.price.first}</p>
     </>
   );
 };
 
-export default WelcomePropss;
+export default WelcomePropsss;

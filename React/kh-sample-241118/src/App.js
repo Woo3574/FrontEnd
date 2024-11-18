@@ -6,9 +6,29 @@ import WelcomeProps from "./24.11.18/WelcomeProps";
 import Articles from "./24.11.18/Articles";
 import MyComponent from "./24.11.18/MyComponent";
 import BoxComponent from "./24.11.18/BoxComponent";
+import Order from "./MyPlactice";
 
+const phone = {
+  name: "fold3",
+  productCompany: "samsung",
+  price: 1500000,
+  option: {
+    first: "sizeUp",
+    second: "memoryUp",
+    third: "2battery",
+  },
+  color: {
+    first: "yellow",
+    second: "red",
+    third: "black",
+  },
+};
 function App() {
-  return <></>;
+  return (
+    <>
+      <Order phone={phone} />
+    </>
+  );
 }
 
 export default App;
