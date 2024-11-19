@@ -4,6 +4,8 @@ import Counter from "./ClassComponent";
 import Say from "./Say";
 import Clock from "./Clock";
 import EventPractice from "./EventPractice";
+import DropDownComponent from "./DropDownComponent";
+import RadioButton from "./RadioButton";
 
 function App1119() {
   return (
@@ -12,6 +14,8 @@ function App1119() {
       <Say />
       <Clock />
       <EventPractice />
+      <DropDownComponent />
+      <RadioButton />
     </>
   );
 }
