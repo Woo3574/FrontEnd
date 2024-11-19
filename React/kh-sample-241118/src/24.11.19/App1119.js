@@ -6,6 +6,7 @@ import Clock from "./Clock";
 import EventPractice from "./EventPractice";
 import DropDownComponent from "./DropDownComponent";
 import RadioButton from "./RadioButton";
+import TableMap from "./TableMap";
 
 function App1119() {
   return (
@@ -16,6 +17,7 @@ function App1119() {
       <EventPractice />
       <DropDownComponent />
       <RadioButton />
+      <TableMap />
     </>
   );
 }
