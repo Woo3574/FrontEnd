@@ -7,6 +7,7 @@ import Articles from "./24.11.18/Articles";
 import MyComponent from "./24.11.18/MyComponent";
 import BoxComponent from "./24.11.18/BoxComponent";
 import Order from "./MyPlactice";
+import TouchInc from "./MyPlactice";
 
 const phone = {
   name: "fold3",
@@ -26,7 +27,7 @@ const phone = {
 function App() {
   return (
     <>
-      <Order phone={phone} />
+      <TouchInc />
     </>
   );
 }
