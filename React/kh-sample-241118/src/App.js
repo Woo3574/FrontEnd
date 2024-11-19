@@ -7,7 +7,6 @@ import Articles from "./24.11.18/Articles";
 import MyComponent from "./24.11.18/MyComponent";
 import BoxComponent from "./24.11.18/BoxComponent";
 import Order from "./MyPlactice";
-import Counter from "./24.11.19/ClassComponent";
 
 const phone = {
   name: "fold3",
@@ -28,7 +27,6 @@ function App() {
   return (
     <>
       <Order phone={phone} />
-      <Counter />
     </>
   );
 }
