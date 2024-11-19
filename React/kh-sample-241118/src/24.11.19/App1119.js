@@ -3,6 +3,7 @@ import "../App.css";
 import Counter from "./ClassComponent";
 import Say from "./Say";
 import Clock from "./Clock";
+import EventPractice from "./EventPractice";
 
 function App1119() {
   return (
@@ -10,6 +11,7 @@ function App1119() {
       <Counter />
       <Say />
       <Clock />
+      <EventPractice />
     </>
   );
 }
