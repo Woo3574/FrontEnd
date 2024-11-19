@@ -14,6 +14,7 @@ const Counter = () => {
       <h1>{number}</h1>
       {/* setNumber() << 이건 호출이기 때문에 눌렸을때 동작하게 만들려면 익명의 함수를 만들어줘야한다. */}
       <button onClick={() => setNumber(number + 1)}>+1</button>
+      <button onClick={() => setNumber(0)}>0</button>
     </>
   );
 };
