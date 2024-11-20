@@ -61,29 +61,29 @@
 
 //(3)
 
-// import { useState } from "react";
-// const RadoioButton = () => {
-//   const [selecet, setSelect] = useState("apple");
+import { useState } from "react";
+const RadoioButton = () => {
+  const [selecet, setSelect] = useState("apple");
 
-//   const handleChange = (e) => {
-//     setSelect(e.target.value);
-//   };
+  const handleChange = (e) => {
+    setSelect(e.target.value);
+  };
 
-//   return (
-//     <>
-//       <label htmlFor="apple">
-//         <input
-//           type="radio"
-//           name="fruits"
-//           id="apple"
-//           value="apple"
-//           onChange={handleChange}
-//         />
-//         사과
-//       </label>
-//       <label htmlFor="banana">
-//         <input type="radio" name="fruits" id="banana" value="banana" />
-//       </label>
-//     </>
-//   );
-// };
+  return (
+    <>
+      <label htmlFor="apple">
+        <input
+          type="radio"
+          name="fruits"
+          id="apple"
+          value="apple"
+          onChange={handleChange}
+        />
+        사과
+      </label>
+      <label htmlFor="banana">
+        <input type="radio" name="fruits" id="banana" value="banana" />
+      </label>
+    </>
+  );
+};
