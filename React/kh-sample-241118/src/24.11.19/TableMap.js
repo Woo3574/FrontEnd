@@ -53,6 +53,7 @@ const TableMap = () => {
     //이때 서버와 비동기 통신이 일어남
     // 리액트에서는 setMemberDate = (responseData) 가 작동하지 않는다
     // 그래서 다음과 같은 방식이 필요
+    // 마운트시점
     setMemberDate(responseData);
   }, []);
 

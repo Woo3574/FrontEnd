@@ -25,11 +25,7 @@ const phone = {
   },
 };
 function App() {
-  return (
-    <>
-      <TouchInc />
-    </>
-  );
+  return <></>;
 }
 
 export default App;
