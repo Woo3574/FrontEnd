@@ -1,4 +1,3 @@
-import logo from "../logo.svg";
 import "../App.css";
 import JsxSyntax from "./JSX문법";
 import GreetingComponent from "./GreetingComponent";
