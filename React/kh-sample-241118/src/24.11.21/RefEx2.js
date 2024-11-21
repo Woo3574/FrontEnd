@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const InnerValueKeep = () => {
   const myButtonRef = useRef(null); // 특정한 DOM의 위치를 가리키기 위해서 사용
@@ -13,18 +13,26 @@ const InnerValueKeep = () => {
   }, []);
 
   // 컴포넌트 내부 변수값 유지
-  const count = useRef(0); // count.current 에 값이 들어간다.
+  // const count = useRef(0); // count.current 에 값이 들어간다.
+
+  let count = 0;
+  const [state, setState] = useState(false);
 
   const handelClick = () => {
-    count.current += 1;
-    alert(`클릭 횟수 : ${count.current}`);
+    // count.current += 1;
+    // alert(`클릭 횟수 : ${count.current}`);
+    count += 1;
+    setState(!state);
+    alert(`클릭 횟수 : ${count}`);
   };
 
   return (
     <>
       <button ref={myButtonRef} onClick={handelClick}>
-        확인
+        초기상태
       </button>
     </>
   );
 };
+
+export default InnerValueKeep;
