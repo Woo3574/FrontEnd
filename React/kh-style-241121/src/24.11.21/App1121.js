@@ -1,7 +1,7 @@
 import "../App.css";
 import StyledComponent from "./StyledComponents";
 
-function App() {
+function App1121() {
   return (
     <>
       <StyledComponent />
@@ -9,4 +9,4 @@ function App() {
   );
 }
 
-export default App;
+export default App1121;
