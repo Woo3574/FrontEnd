@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Container, StyledInput, StyledButton } from "../Styles/CommonStyle";
 // Link 즉시이동, useNavigate 특정한 조건이 있고 난다음에 들어갈때 사용
 
 const Login = () => {
@@ -37,21 +38,25 @@ const Login = () => {
   };
 
   return (
-    <>
-      <input value={inputId} placeholder="아이디" onChange={onChangeId} />
+    <Container>
+      <StyledInput value={inputId} placeholder="아이디" onChange={onChangeId} />
       <br />
-      <input value={inputPw} placeholder="비밀번호" onChange={onChangePw} />
+      <StyledInput
+        value={inputPw}
+        placeholder="비밀번호"
+        onChange={onChangePw}
+      />
       <br />
       {isId && isPw ? (
-        <button enabled onClick={onClickLogin}>
+        <StyledButton enabled onClick={onClickLogin}>
           확인
-        </button>
+        </StyledButton>
       ) : (
-        <button disabled onClick={onClickLogin}>
+        <StyledButton disabled onClick={onClickLogin}>
           확인
-        </button>
+        </StyledButton>
       )}
-    </>
+    </Container>
   );
 };
 
