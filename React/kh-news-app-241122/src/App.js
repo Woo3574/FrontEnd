@@ -1,26 +1,12 @@
-import { useState } from "react";
-import axios from "axios";
-
-const App = () => {
-  const [data, setData] = useState(null);
-  const onClick = async () => {
-    try {
-      const response = await axios.get(
-        "https://newsapi.org/v2/top-headlines?country=us&apiKey=1d087979698d4b8ca3e9c262cfdd5373"
-      );
-      setData(response.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+import logo from "./logo.svg";
+import "./App.css";
+import News from "./Pages/News";
+function App() {
   return (
-    <div>
-      <div>
-        <button onClick={onClick}>불러오기</button>
-      </div>
-      {data && <textarea rows={7} value={JSON.stringify(data, null, 2)} />}
-    </div>
+    <>
+      <News />
+    </>
   );
-};
+}
 
 export default App;
