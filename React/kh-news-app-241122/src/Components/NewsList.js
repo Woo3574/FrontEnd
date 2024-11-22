@@ -28,6 +28,8 @@ const NewsList = () => {
     // useEffect의 콜백 함수는 비동기적으로 작동할 수 없으므로, 비동기 작업을 처리하기 위해
     // 응답이 언제 올지 모르기 때문에 비동기로 처리한다.
     // 응답 두개 이상 대기 시 순서가 필요하다면 하나의 useEffect 안에 나열하면 되고, 상관없다면 useEffect 를 두개로 분리
+
+    // useEffect 안에 함수를 다시만든 이유는 비동기 동작을 하기위해서  (async)
     const fetchData = async () => {
       try {
         const response = await axios.get(
