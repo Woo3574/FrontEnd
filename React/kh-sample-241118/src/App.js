@@ -8,6 +8,7 @@ import MyComponent from "./24.11.18/MyComponent";
 import BoxComponent from "./24.11.18/BoxComponent";
 import Order from "./MyPlactice";
 import TouchInc from "./MyPlactice";
+import Test from "./test";
 
 const phone = {
   name: "fold3",
@@ -24,8 +25,19 @@ const phone = {
     third: "black",
   },
 };
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <Test
+        name="김태우"
+        age="31"
+        addr="경기도 광명시"
+        job="경찰"
+        isAdult={true}
+      />
+    </>
+  );
 }
 
 export default App;
