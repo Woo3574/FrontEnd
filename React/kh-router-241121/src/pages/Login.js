@@ -48,9 +48,7 @@ const Login = () => {
       />
       <br />
       {isId && isPw ? (
-        <StyledButton enabled onClick={onClickLogin}>
-          확인
-        </StyledButton>
+        <StyledButton onClick={onClickLogin}>확인</StyledButton>
       ) : (
         <StyledButton disabled onClick={onClickLogin}>
           확인
