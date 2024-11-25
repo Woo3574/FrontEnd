@@ -18,7 +18,7 @@ const Login = () => {
 
   // userContext 훅으로 우리가 만든 Usercontext의 전역 상태값에 접근
   const context = useContext(UserContext);
-  const { setUserId, setPassword } = context;
+  const { setUserId, setPassword, color } = context;
 
   const onChangeId = (e) => {
     setInputId(e.target.value);
@@ -47,7 +47,7 @@ const Login = () => {
   };
 
   return (
-    <Container>
+    <Container color={color}>
       <StyledInput value={inputId} placeholder="아이디" onChange={onChangeId} />
       <br />
       <StyledInput
