@@ -16,7 +16,7 @@ const NewsListBlock = styled.div`
   }
 `;
 
-const NewsList = () => {
+const NewsList = ({ category }) => {
   const [articles, setArticles] = useState(null); // none, null, 빈문자열, 0 = false
 
   useEffect(() => {
@@ -34,8 +34,9 @@ const NewsList = () => {
     // useEffect 안에 함수를 다시만든 이유는 비동기 동작을 하기위해서  (async)
     const fetchData = async () => {
       try {
+        const query = category === "all" ? "all" : `category=${category}`;
         const response = await axios.get(
-          "https://newsapi.org/v2/top-headlines?country=us&apiKey=1d087979698d4b8ca3e9c262cfdd5373"
+          `https://newsapi.org/v2/top-headlines?country=us&${query}&apiKey=1d087979698d4b8ca3e9c262cfdd5373`
         );
         setArticles(response.data.articles);
       } catch (e) {
@@ -43,7 +44,7 @@ const NewsList = () => {
       }
     };
     fetchData();
-  }, []); // 의존성 배열이 비어 있으면 mount 시점 (즉, 컴퍼넌트 렌더링 이후 호출)
+  }, [category]); // 의존성 배열이 비어 있으면 mount 시점 (즉, 컴퍼넌트 렌더링 이후 호출)
 
   return (
     <NewsListBlock>
