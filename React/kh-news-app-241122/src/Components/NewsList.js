@@ -17,10 +17,12 @@ const NewsListBlock = styled.div`
 `;
 
 const NewsList = () => {
-  const [articles, setArticles] = useState(null);
+  const [articles, setArticles] = useState(null); // none, null, 빈문자열, 0 = false
 
   useEffect(() => {
-    // async가 있어서 다이렉트를 불러올수가 없다
+    //콜백함수 , 의존성배열의 조건에 만족하면 userEffect 실행
+
+    // async가 있어서 다이렉트를 불러올수가 없다, (async 자체도 비동기함수)
     // 밑에 내부코드는 비동기(외부에선 내부 이 함수가 있는지 모른다)
     // 상대가 응답이 언제올지 모를때 비동기를 건다
 
@@ -40,9 +42,8 @@ const NewsList = () => {
         console.log(e);
       }
     };
-
     fetchData();
-  }, []);
+  }, []); // 의존성 배열이 비어 있으면 mount 시점 (즉, 컴퍼넌트 렌더링 이후 호출)
 
   return (
     <NewsListBlock>
