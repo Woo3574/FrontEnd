@@ -8,24 +8,27 @@ import Article from "./pages/Article";
 import Articles from "./pages/Articles";
 import Login from "./pages/Login";
 import Layout from "./Styles/Layout";
+import UserStore from "./context/UserStore";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Router>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          {/* 중첩Route */}
-          <Route element={<Layout />}>
-            <Route path="/home" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/profile/:username" element={<Profiles />} />
-            <Route path="articles" element={<Articles />} />
-            <Route path="article/:id" element={<Article />} />
-          </Route>
-        </Routes>
-      </Router>
+      <UserStore>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            {/* 중첩Route */}
+            <Route element={<Layout />}>
+              <Route path="/home" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/profile/:username" element={<Profiles />} />
+              <Route path="articles" element={<Articles />} />
+              <Route path="article/:id" element={<Article />} />
+            </Route>
+          </Routes>
+        </Router>
+      </UserStore>
     </>
   );
 }
