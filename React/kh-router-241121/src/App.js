@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Layout from "./Styles/Layout";
 import UserStore from "./context/UserStore";
 import Setting from "./pages/Setting";
+import ImageUploader from "./pages/ImgUploader";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
               <Route path="articles" element={<Articles />} />
               <Route path="article/:id" element={<Article />} />
               <Route path="/setting" element={<Setting />}></Route>
+              <Route path="/firebase" element={<ImageUploader />}></Route>
             </Route>
           </Routes>
         </Router>
