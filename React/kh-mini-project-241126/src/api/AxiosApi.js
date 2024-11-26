@@ -1,27 +1,29 @@
 import axios from "axios";
-const EZEN_DOMAIN = "http://localhost:8111";
+const KH_DOMAIN = "http://localhost:8111";
 
 const AxiosApi = {
-  // 로그인
-  memberLogin: async (email, pw) => {
+  login: async (email, pw) => {
+    console.log("이메일 : ", email);
+    console.log("패스워드 : ", pw);
     const login = {
       email: email,
-      pwd: pw,
+      password: pw,
     };
-    return await axios.post(EZEN_DOMAIN + "/auth/login", login);
+    return await axios.post(KH_DOMAIN + "/auth/login", login);
   },
-  // 회원 가입 여부 확인
-  memberRegCheck: async (email) => {
-    return await axios.get(EZEN_DOMAIN + `/auth/exists/${email}`);
+  regCheck: async (email) => {
+    return await axios.get(KH_DOMAIN + `/auth/exists/${email}`);
   },
-  // 회원 가입
-  memberReg: async (email, pwd, name) => {
+  signup: async (email, pwd, name) => {
+    console.log("이메일 : ", email);
+    console.log("패스워드 : ", pwd);
+    console.log("이름 : ", name);
     const member = {
       email: email,
-      pwd: pwd,
+      password: pwd,
       name: name,
     };
-    return await axios.post(EZEN_DOMAIN + "/auth/signup", member);
+    return await axios.post(KH_DOMAIN + `/auth/signup`, member);
   },
 };
 
