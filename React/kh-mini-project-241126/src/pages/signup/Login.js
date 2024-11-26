@@ -1,131 +1,87 @@
-import React, { useState } from "react";
-import styled, { createGlobalStyle } from "styled-components";
-import { useNavigate } from "react-router-dom"; // useNavigate 훅 import
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import imgLogo from "../../images/kakaoLion.png";
+import Button from "../../components/ButtonComponent";
+import Input from "../../components/InputComponent";
+import { Container, Items } from "../../components/SignupComponent";
+import AxiosApi from "../../api/AxiosApi";
 
-const LoginGlobalStyle = createGlobalStyle`
-  * {
-    background-color: hsl(0, 0%, 85%);
-    
-  }
+const Img = styled.img`
+  width: 180px;
+  object-fit: cover;
 `;
-
-const Container = styled.div`
-  width: 500px;
-  height: 600px;
-  margin: 200px auto;
-  padding: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: white;
-  border: 1px solid none;
-  border-radius: 3%;
-
-  * {
-    background-color: inherit;
-  }
-`;
-
-const Header = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 40px;
-`;
-
-const Logo = styled.img`
-  width: 80px;
-  height: 80px;
-  margin-right: 10px; /* 텍스트와 이미지 사이 간격 */
-`;
-
-const Input = styled.input`
-  border: 1px solid gray;
-  height: 40px;
-  border-radius: 8px;
-  margin-top: 10px;
-`;
-
-const Text = styled.p`
-  font-size: 20px;
-  margin-top: 20px;
-`;
-
-const Button = styled.button`
-  height: 40px;
-  border-radius: 8px;
-  margin: 20px 0px;
-  background-color: ${({ disabled }) =>
-    disabled ? "gray" : "black"}; /* 비활성화 시 회색 */
-  color: white;
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
-  transition: transform 0.1s ease; /* 부드럽게 이동하도록 transition 추가 */
-  &:active {
-    ${({ disabled }) =>
-      disabled
-        ? "disabled"
-        : "transform: translateY(2px)"}; /* 버튼이 눌렸을 때 5px 아래로 이동 */
-  }
-`;
-
-const TextButton = styled.button`
-  border: none;
-  cursor: pointer;
-  color: black;
-  text-decoration: none;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: blue;
-  }
-`;
-
-///////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////
 
 const Login = () => {
-  const [userId, setUserId] = useState(""); // 아이디 상태
-  const [password, setPassword] = useState(""); // 비밀번호 상태
+  // State for inputs
+  const [inputEmail, setInputEmail] = useState("");
+  const [inputPw, setInputPw] = useState("");
 
-  const userIdVaild = userId.length >= 6;
-  const passwordVaild = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(password);
+  const navigate = useNavigate();
 
-  const isFormValid = userIdVaild && passwordVaild;
-  const navigate = useNavigate(); // useNavigate 훅 사용
-  const handleClick = () => {
-    navigate("/signup");
+  // State for validation
+  const [isId, setIsId] = useState(false);
+  const [isPw, setIsPw] = useState(false);
+
+  // Email and Password change handlers
+  const handleInputChange = (e, setState, setValidState) => {
+    setState(e.target.value);
+    setValidState(e.target.value.length >= 5);
+  };
+
+  const onClickLogin = async () => {
+    try {
+      const rsp = await AxiosApi.login(inputEmail, inputPw);
+      console.log(rsp.data);
+      if (rsp.data) {
+        navigate("/home");
+      } else {
+        alert("아이디 및 패스워드가 틀립니다.");
+      }
+    } catch (e) {
+      alert("서버가 응답하지 않습니다.");
+    }
   };
 
   return (
-    <>
-      <LoginGlobalStyle />
-      <Container>
-        <Header>
-          <Logo src="/images/PAIKBOOKER.png" alt="Logo" />
-          <h1>백부커</h1>
-        </Header>
-        <h1>Log in</h1>
-        <Text>ID</Text>
-        <Input
-          type="text"
-          value={userId}
-          placeholder="아이디 입력 (6자리 이상)"
-          onChange={(e) => setUserId(e.target.value)}
-        />
-        <Text>Passsword</Text>
-        <Input
-          type="text"
-          value={password}
-          placeholder="패스워드 입력 (8자리 이상) "
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button disabled={!isFormValid}> Log in</Button>
+    <Container>
+      <Items variant="sign">
+        <Img src={imgLogo} alt="Logo" />
+      </Items>
 
-        <TextButton onClick={handleClick}>
-          회원가입이 안되있으신가요? 여기를 눌러주세요!{" "}
-        </TextButton>
-      </Container>
-    </>
+      <Items margin="10px">
+        <Input
+          placeholder="이메일"
+          value={inputEmail}
+          onChange={(e) => handleInputChange(e, setInputEmail, setIsId)}
+        />
+      </Items>
+
+      <Items margin="10px">
+        <Input
+          type="password"
+          placeholder="패스워드"
+          value={inputPw}
+          onChange={(e) => handleInputChange(e, setInputPw, setIsPw)}
+        />
+      </Items>
+
+      <Items margin="10px">
+        {isId && isPw ? (
+          <Button enabled onClick={onClickLogin}>
+            SIGN IN
+          </Button>
+        ) : (
+          <Button disabled>SIGN IN</Button>
+        )}
+      </Items>
+
+      <Items variant="signup">
+        <Link to="/Signup" className="link_style">
+          <span>Sign Up</span>
+        </Link>
+      </Items>
+    </Container>
   );
 };
 
