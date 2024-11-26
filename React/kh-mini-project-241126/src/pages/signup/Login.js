@@ -119,7 +119,7 @@ const Login = () => {
           placeholder="패스워드 입력 (8자리 이상) "
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button disabled={!isFormValid}> Sign in</Button>
+        <Button disabled={!isFormValid}> Log in</Button>
 
         <TextButton onClick={handleClick}>
           회원가입이 안되있으신가요? 여기를 눌러주세요!{" "}
