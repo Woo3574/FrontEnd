@@ -29,6 +29,10 @@ const AxiosApi = {
   memberList: async () => {
     return await axios.get(KH_DOMAIN + "/members");
   },
+  // 개별 회원 조회
+  memberInfo: async (email) => {
+    return await axios.get(KH_DOMAIN + `/members/${email}`);
+  },
 };
 
 export default AxiosApi;

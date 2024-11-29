@@ -19,12 +19,14 @@ import { FaHome, FaClipboardList, FaRegNewspaper } from "react-icons/fa";
 import { BiCameraMovie } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { LuListTodo } from "react-icons/lu";
+import AxiosApi from "../api/AxiosApi";
 
 const Layout = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Side Bar 메뉴 열고 닫기
   const [member, setMember] = useState(""); // 회원 정보 업데이트
-  const { color, name, imgUrl } = useContext(UserContext); // 전역 상태 관리
+  const { color } = useContext(UserContext); // 전역 상태 관리
   const navigate = useNavigate();
+  const email = localStorage.getItem("email");
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -34,7 +36,17 @@ const Layout = () => {
     navigate("/setting");
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const getMemberInfo = async () => {
+      try {
+        const rsp = await AxiosApi.memberInfo(email);
+        setMember(rsp.data);
+      } catch (e) {
+        alert("서버가 응답하지 않습니다.");
+      }
+    };
+    getMemberInfo();
+  }, []);
 
   return (
     <Container color={color}>
@@ -83,5 +95,4 @@ const Layout = () => {
     </Container>
   );
 };
-
 export default Layout;
