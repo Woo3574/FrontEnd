@@ -17,7 +17,10 @@ const StoreSearch = () => {
     const fetchCategories = async () => {
       // 예외 발생시 그에 대한 대응 요구를 위해
       try {
-        const rsp = await axios.get("/stores/categories");
+        const rsp = await axios.get(
+          "http://localhost:8111/api/stores/categories"
+        );
+        console.log("카테골 ㅣ목록 응답:", rsp.data);
         setCategories(rsp.data);
       } catch (error) {
         console.error("카테고리 목록 가져오기 실패: ", error);
@@ -33,7 +36,7 @@ const StoreSearch = () => {
   const handleSearch = async () => {
     try {
       // 내부 비동기 await, 요청이 완료될 때까지 기다린 후, 그 데이터를 response에 저장
-      const rsp = await axios.get("/stores/search", {
+      const rsp = await axios.get("http://localhost:8111/api/stores/search", {
         params: {
           region,
           brandName,

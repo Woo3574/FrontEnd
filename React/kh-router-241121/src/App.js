@@ -21,7 +21,7 @@ function App() {
       <UserStore>
         <Router>
           <Routes>
-            <Route path="/" element={<Login />} />
+            {/* <Route path="/" element={<Login />} /> */}
             {/* 중첩Route */}
             <Route element={<Layout />}>
               <Route path="/home" element={<Home />} />
