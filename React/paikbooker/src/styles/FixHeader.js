@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import styled from "styled-components";
 
 const Header = styled.header`
@@ -14,6 +15,10 @@ const Hdiv1 = styled.div`
   flex-direction: row;
   justify-content: space-between; /* 양쪽 끝으로 배치 */
   align-items: center; /* 세로 가운데 정렬 */
+
+  img {
+    height: 50px;
+  }
 `;
 
 const Hdiv1_L = styled.div`
@@ -38,7 +43,13 @@ const Hdiv2 = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const SearchBox = styled.div`
+  width: 40%;
+  height: 75%;
   border: 1px solid #e4e4e4;
+  border-radius: 50px;
 `;
 
 const Hdiv3 = styled.div`
@@ -79,6 +90,7 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
 `;
+
 const FixHeader = () => {
   return (
     <>
@@ -88,18 +100,18 @@ const FixHeader = () => {
             <img
               src="https://firebasestorage.googleapis.com/v0/b/kh-basic-frontend-react-f5a7b.firebasestorage.app/o/PAIKBOOKER%2F00백부커02B.png?alt=media&token=9bccec14-c221-42c0-8342-16f463bcb1f0"
               alt="Logo"
-              style={{ height: "50px" }}
             />
           </Hdiv1_L>
           <Hdiv1_R>
             <img
               src="https://firebasestorage.googleapis.com/v0/b/kh-basic-frontend-react-f5a7b.firebasestorage.app/o/PAIKBOOKER%2FProfile.png?alt=media&token=6f3e2ec4-737f-4646-9d52-254c21319266"
               alt="Profile"
-              style={{ height: "50px" }}
             />
           </Hdiv1_R>
         </Hdiv1>
-        <Hdiv2></Hdiv2>
+        <Hdiv2>
+          <SearchBox></SearchBox>
+        </Hdiv2>
         <Hdiv3>
           <div>
             <ImageContainer>
