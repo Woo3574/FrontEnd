@@ -11,7 +11,7 @@ const HomeItemBlock = styled.div`
   .brandWrapper {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 50px;
   }
 
   .brand {
@@ -26,36 +26,59 @@ const HomeItemBlock = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
   }
 
   .brandLogo {
-    width: 300px;
+    width: 150px;
     height: 100px;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     background-color: #f1f1f1;
     border-radius: 10px;
   }
 
-  .storeBox {
+  .stores {
+    box-sizing: border-box;
     display: flex;
-    gap: 10px;
+    gap: 50px;
+  }
+
+  .storeBox {
+    width: 383px;
+    height: 276px;
+    margin-top: 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
   }
 
   .storeBoxUp {
-    width: 100px;
-    height: 100px;
-    background-size: cover;
-    background-color: #dcdcdc;
-    border-radius: 10px;
+    width: 100%;
+    height: 215px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #f1f1f1;
+    border-radius: 30px;
   }
 
   .storeBoxDown {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     font-size: 14px;
-    color: #333;
+  }
+
+  .boxDTextUp {
+    padding-top: 10px;
+    font-size: 16px;
+  }
+
+  .boxDTextDown {
+    font-size: 16px;
   }
 `;
 
@@ -85,35 +108,43 @@ const HomeItem = () => {
   }
 
   return (
-    <HomeItemBlock>
-      <div className="container">
-        {brands.map(({ brand, stores }) => (
-          <div key={brand.storeNo} className="brandWrapper">
-            {/* 브랜드 로고 */}
-            <div className="brand">
-              <div
-                className="brandLogo"
-                style={{ backgroundImage: `url(${brand.brandLogo})` }}
-              ></div>
-            </div>
+    <>
+      <HomeItemBlock>
+        <div className="container">
+          {brands.map(({ brand, stores }) => (
+            <div key={brand.storeNo} className="brandWrapper">
+              {/* 브랜드 로고 */}
+              <div className="brand">
+                <div
+                  className="brandLogo"
+                  style={{
+                    backgroundImage: `url(${brand.brandLogo})`,
+                  }}
+                ></div>
+              </div>
 
-            {/* 매장 목록 */}
-            <div className="storeBox">
-              {stores.map((store) => (
-                <div key={store.storeNo} className="storeBoxDown">
-                  <div
-                    className="storeBoxUp"
-                    style={{ backgroundImage: `url(${store.storeImg})` }}
-                  ></div>
-                  <div>{store.storeName}</div>
-                  <div>{store.storeAddr}</div>
-                </div>
-              ))}
+              {/* 매장 목록 */}
+              <div className="stores">
+                {stores.map((store) => (
+                  <div key={store.storeNo} className="storeBoxDown">
+                    <div className="storeBox">
+                      <div
+                        className="storeBoxUp"
+                        style={{ backgroundImage: `url(${store.storeImg})` }}
+                      ></div>
+                      <div className="storeBoxDown">
+                        <div className="boxDTextUp">{store.storeName}</div>
+                        <div className="boxDTextDown">{store.storeAddr}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </HomeItemBlock>
+          ))}
+        </div>
+      </HomeItemBlock>
+    </>
   );
 };
 
