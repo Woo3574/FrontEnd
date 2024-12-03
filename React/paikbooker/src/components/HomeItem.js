@@ -6,7 +6,6 @@ const HomeItemBlock = styled.div`
   .container {
     display: flex;
     flex-direction: column-reverse; /* 순서를 반대로 */
-    gap: 30px;
   }
 
   .brandWrapper {
