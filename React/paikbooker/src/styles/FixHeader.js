@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-pascal-case */
 import styled from "styled-components";
+import StoreSearch from "../search/StoreSearch";
 
 const Header = styled.header`
   width: 1920px;
@@ -50,6 +51,9 @@ const SearchBox = styled.div`
   height: 75%;
   border: 1px solid #e4e4e4;
   border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Hdiv3 = styled.div`
@@ -78,7 +82,7 @@ const Hdiv3 = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  width: 40px;
+  width: auto;
   height: 40px;
   display: flex;
   justify-content: center;
@@ -110,7 +114,9 @@ const FixHeader = () => {
           </Hdiv1_R>
         </Hdiv1>
         <Hdiv2>
-          <SearchBox></SearchBox>
+          <SearchBox>
+            <StoreSearch />
+          </SearchBox>
         </Hdiv2>
         <Hdiv3>
           <div>

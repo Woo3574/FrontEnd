@@ -3,18 +3,22 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import StoreSearch from "./search/StoreSearch";
 import GlobalStyle from "./styles/GlobalStyle";
 import FixHeader from "./styles/FixHeader";
+import Main from "./pages/Main";
 
 function App() {
   return (
     <>
-      <GlobalStyle />
+      {/* <GlobalStyle />
       <Router>
         <Routes>
-          <Route element={<FixHeader />}>
-            <Route path="/" />
-          </Route>
+          <Main>
+            <Route element={<FixHeader />}>
+              <Route path="/" />
+            </Route>
+          </Main>
         </Routes>
-      </Router>
+      </Router> */}
+      <Main />
     </>
   );
 }
