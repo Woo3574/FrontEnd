@@ -1,11 +1,13 @@
 import FixHeader from "../styles/FixHeader";
 import StoreList from "../components/StoreList";
+import HomeItem from "../components/HomeItem";
 
 const Main = () => {
   return (
     <>
       <FixHeader />
-      <StoreList />
+      <HomeItem />
+      {/* <StoreList /> */}
     </>
   );
 };
