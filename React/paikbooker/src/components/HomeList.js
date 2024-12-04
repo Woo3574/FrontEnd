@@ -1,13 +1,17 @@
-import styled from "styled-components";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import styled from "styled-components";
 
 const HomeItemBlock = styled.div`
   .container {
-    width: 1920px;
-    height: 336px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column-reverse; /* 순서를 반대로 */
+  }
+
+  .brandWrapper {
+    display: flex;
+    align-items: center;
+    gap: 50px;
   }
 
   .brand {
@@ -19,32 +23,57 @@ const HomeItemBlock = styled.div`
     box-sizing: border-box;
     background-color: #f1f1f1;
     border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .brandLogo {
+    width: 150px;
+    height: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  .stores {
+    box-sizing: border-box;
+    display: flex;
+    gap: 50px;
   }
 
   .storeBox {
     width: 383px;
     height: 276px;
     margin-top: 50px;
-    margin-left: 50px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
   }
 
   .storeBoxUp {
     width: 100%;
     height: 215px;
-    border-radius: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     background-color: #f1f1f1;
+    border-radius: 30px;
   }
 
   .storeBoxDown {
-    width: 100%;
-    height: 55px;
-    padding-top: 10px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    font-size: 14px;
   }
 
   .boxDTextUp {
+    padding-top: 10px;
     font-size: 16px;
   }
 
@@ -60,12 +89,17 @@ const HomeItem = () => {
   useEffect(() => {
     const fetchBrands = async () => {
       try {
-        const rsp = await axios.get("http://localhost:8111/api/stores/home");
-        setBrands(rsp.data);
+        const response = await axios.get(
+          "http://localhost:8111/api/stores/home"
+        );
+        setBrands(response.data);
       } catch (error) {
-        console.error("데이터 로딩 실패", error);
+        console.error("데이터 로딩 실패:", error);
+      } finally {
+        setLoading(false);
       }
     };
+
     fetchBrands();
   }, []);
 
@@ -77,14 +111,37 @@ const HomeItem = () => {
     <>
       <HomeItemBlock>
         <div className="container">
-          <div className="brand" />
-          <div className="storeBox">
-            <div className="storeBoxUp" />
-            <div className=" storeBoxDown">
-              <div className="boxDTextUp">TEXT UP</div>
-              <div className="boxDTextDown">TEXT DOWN</div>
+          {brands.map(({ brand, stores }) => (
+            <div key={brand.storeNo} className="brandWrapper">
+              {/* 브랜드 로고 */}
+              <div className="brand">
+                <div
+                  className="brandLogo"
+                  style={{
+                    backgroundImage: `url(${brand.brandLogo})`,
+                  }}
+                ></div>
+              </div>
+
+              {/* 매장 목록 */}
+              <div className="stores">
+                {stores.map((store) => (
+                  <div key={store.storeNo} className="storeBoxDown">
+                    <div className="storeBox">
+                      <div
+                        className="storeBoxUp"
+                        style={{ backgroundImage: `url(${store.storeImg})` }}
+                      ></div>
+                      <div className="storeBoxDown">
+                        <div className="boxDTextUp">{store.storeName}</div>
+                        <div className="boxDTextDown">{store.storeAddr}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </HomeItemBlock>
     </>

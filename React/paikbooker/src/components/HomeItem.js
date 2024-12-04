@@ -82,69 +82,79 @@ const HomeItemBlock = styled.div`
   }
 `;
 
-const HomeItem = () => {
-  const [brands, setBrands] = useState([]);
-  const [loading, setLoading] = useState(true);
+const HomeItem = ({ storeData }) => {
+  // storeData가 유효한지 확인하고 빈 배열로 초기화
+  const stores =
+    Array.isArray(storeData) && storeData.length > 0
+      ? storeData.reduce((acc, curr) => {
+          const brand = acc.find(
+            (item) => item.brand.brandName === curr.brandName
+          );
 
-  useEffect(() => {
-    const fetchBrands = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:8111/api/stores/home"
-        );
-        setBrands(response.data);
-      } catch (error) {
-        console.error("데이터 로딩 실패:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+          if (brand) {
+            brand.stores.push(curr);
+          } else {
+            acc.push({
+              brand: {
+                brandLogo: curr.brandLogo,
+                brandName: curr.brandName,
+              },
+              stores: [curr],
+            });
+          }
 
-    fetchBrands();
-  }, []);
+          return acc;
+        }, [])
+      : [];
 
-  if (loading) {
-    return <div>Loading...</div>;
+  // 디버깅: storeData와 stores 확인
+  console.log("storeData 값 확인:", storeData);
+  console.log("그룹화된 stores 값 확인:", stores);
+
+  if (!stores || stores.length === 0) {
+    return <div>No stores available</div>; // 데이터가 없을 경우 처리
   }
 
   return (
-    <>
-      <HomeItemBlock>
-        <div className="container">
-          {brands.map(({ brand, stores }) => (
-            <div key={brand.storeNo} className="brandWrapper">
+    <HomeItemBlock>
+      <div className="container">
+        {stores.length > 0 ? (
+          stores.map((brandData) => (
+            <div key={brandData.brand.brandLogo} className="brandWrapper">
               {/* 브랜드 로고 */}
               <div className="brand">
                 <div
                   className="brandLogo"
                   style={{
-                    backgroundImage: `url(${brand.brandLogo})`,
+                    backgroundImage: `url(${brandData.brand.brandLogo})`, // 브랜드 로고 설정
                   }}
                 ></div>
               </div>
 
-              {/* 매장 목록 */}
+              {/* 해당 브랜드의 매장 목록 */}
               <div className="stores">
-                {stores.map((store) => (
-                  <div key={store.storeNo} className="storeBoxDown">
-                    <div className="storeBox">
-                      <div
-                        className="storeBoxUp"
-                        style={{ backgroundImage: `url(${store.storeImg})` }}
-                      ></div>
-                      <div className="storeBoxDown">
-                        <div className="boxDTextUp">{store.storeName}</div>
-                        <div className="boxDTextDown">{store.storeAddr}</div>
-                      </div>
+                {brandData.stores.map((store) => (
+                  <div key={store.storeNo} className="storeBox">
+                    <div
+                      className="storeBoxUp"
+                      style={{
+                        backgroundImage: `url(${store.storeImg})`, // 매장 이미지 설정
+                      }}
+                    ></div>
+                    <div className="storeBoxDown">
+                      <div className="boxDTextUp">{store.storeName}</div>
+                      <div className="boxDTextDown">{store.storeAddr}</div>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-          ))}
-        </div>
-      </HomeItemBlock>
-    </>
+          ))
+        ) : (
+          <div>No stores available</div> // 매장이 없을 때 메시지 표시
+        )}
+      </div>
+    </HomeItemBlock>
   );
 };
 
