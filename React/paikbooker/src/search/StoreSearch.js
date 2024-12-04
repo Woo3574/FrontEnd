@@ -20,7 +20,7 @@ const StoreSearch = () => {
         const rsp = await axios.get(
           "http://localhost:8111/api/stores/categories"
         );
-        console.log("카테골 ㅣ목록 응답:", rsp.data);
+        console.log("카테고리목록 응답:", rsp.data);
         setCategories(rsp.data);
       } catch (error) {
         console.error("카테고리 목록 가져오기 실패: ", error);
@@ -89,7 +89,7 @@ const StoreSearch = () => {
         <button onClick={handleSearch}>검색</button>
       </div>
       {/* 검색 결과 표시 */}
-      <div>
+      {/* <div>
         {stores.length > 0 ? (
           stores.map((store) => (
             <div key={store.storeNo}>
@@ -103,7 +103,7 @@ const StoreSearch = () => {
         ) : (
           <p>검색 결과가 없습니다.</p>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
