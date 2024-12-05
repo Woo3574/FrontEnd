@@ -101,7 +101,7 @@ const Image = styled.img`
   height: 100%;
 `;
 
-const FixHeader = () => {
+const FixHeader = ({ getDataFromServerAndUpdateStoreList }) => {
   return (
     <>
       <Header>
@@ -121,7 +121,11 @@ const FixHeader = () => {
         </Hdiv1>
         <Hdiv2>
           <SearchBox>
-            <StoreSearch />
+            <StoreSearch
+              getDataFromServerAndUpdateStoreList={
+                getDataFromServerAndUpdateStoreList
+              }
+            />
           </SearchBox>
         </Hdiv2>
         <Hdiv3>
