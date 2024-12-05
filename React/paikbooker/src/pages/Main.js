@@ -2,24 +2,25 @@ import FixHeader from "../styles/FixHeader";
 import StoreList from "../components/StoreList";
 import HomeItem from "../components/HomeItem";
 import GlobalStyle from "../styles/GlobalStyle";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import StoreSearch from "../search/StoreSearch";
 import axios from "axios";
 
 const Main = () => {
-  const [region, setRegion] = useState("all"); // setRegion을 호출해서 region 상태 변경
-  const [brandName, setBrandName] = useState("all");
-  const [reservationTime, setReservationTime] = useState("all");
+  const [region, setRegion] = useState(""); // setRegion을 호출해서 region 상태 변경
+  const [brandName, setBrandName] = useState("");
+  const [reservationTime, setReservationTime] = useState("");
   const [stores, setStores] = useState([]); // 검색된 매장들
   const onSelect = useCallback((category, value) => {
     if (category === "region") {
       setRegion(value);
     } else if (category === "brandName") {
       setBrandName(value);
-    } else if (category === "revationTime") {
+    } else if (category === "reservationTime") {
       setReservationTime(value);
     }
   }, []);
+
   const onSearch = useCallback(async (region, brandName, reservationTime) => {
     try {
       console.log("검색 조건:", { region, brandName, reservationTime }); // 파라미터 확인
@@ -28,9 +29,9 @@ const Main = () => {
         "http://localhost:8111/api/stores/search",
         {
           params: {
-            region: region || "",
-            brandName: brandName || "",
-            reservationTime: reservationTime || "",
+            region: region,
+            brandName: brandName,
+            reservationTime: reservationTime,
           },
         }
       );
@@ -41,6 +42,11 @@ const Main = () => {
     }
   }, []);
 
+  // 컴포넌트가 처음 로드될 때, 기본적으로 모든 매장을 가져오는 검색
+  useEffect(() => {
+    onSearch(region, brandName, reservationTime);
+  }, []); // 빈 배열을 의존성으로 설정하면 컴포넌트가 처음 렌더링될 때만 호출됨
+
   return (
     <>
       <FixHeader />
@@ -48,10 +54,13 @@ const Main = () => {
       <GlobalStyle />
       {/* 하나의 onSelect 전달 */}
       <StoreSearch
-        category={{ region, brandName, reservationTime }}
-        onSelect={onSelect}
-        onSearch={onSearch}
+        region={region}
+        brandName={brandName}
+        reservationTime={reservationTime}
+        onSelect={onSelect} // 카테고리 선택이 부모로 전달됨
+        onSearch={onSearch} // 검색 요청을 부모에서 처리
       />
+
       {/* 디버깅용 상태 출력 */}
       {console.log("현재 stores 상태:", stores)}
       <HomeItem storeData={stores} />

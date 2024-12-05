@@ -86,7 +86,7 @@ const StoreSearch = ({
         </select>
 
         <select
-          value={reservationTime}
+          value={reservationTime} // 부모 상태로 전달된 값
           onChange={(e) => onSelect("reservationTime", e.target.value)}
         >
           <option value="">예약 시간 선택</option>
@@ -97,25 +97,7 @@ const StoreSearch = ({
           ))}
         </select>
         <button onClick={handleSearch}>검색</button>
-        {/* 
-        <button onClick={handleSearch}>검색</button> */}
       </div>
-      {/* 검색 결과 표시 */}
-      {/* <div>
-        {stores.length > 0 ? (
-          stores.map((store) => (
-            <div key={store.storeNo}>
-              <h3>{store.brandName}</h3>
-              <p>{store.storeAddr}</p>
-              <p>{store.storeHour}</p>
-              <p>{store.storePhone}</p>
-              <img src={store.storeMap} alt="" />
-            </div>
-          ))
-        ) : (
-          <p>검색 결과가 없습니다.</p>
-        )}
-      </div> */}
     </div>
   );
 };
