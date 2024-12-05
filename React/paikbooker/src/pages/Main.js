@@ -21,7 +21,7 @@ const Main = () => {
         console.log("검색 조건:", { region, brandName, reservationTime }); // 파라미터 확인
         // API 호출을 통해 조건에 맞는 데이터를 가져옵니다.
         const response = await axios.get(
-          "http://localhost:8111/api/stores/search",
+          "http://localhost:8111/stores/search",
           {
             params: {
               region: region,

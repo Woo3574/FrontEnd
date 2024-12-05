@@ -18,7 +18,7 @@ const StoreSearch = ({ getDataFromServerAndUpdateStoreList }) => {
       // 예외 발생시 그에 대한 대응 요구를 위해
       try {
         const rsp = await axios.get(
-          "http://localhost:8111/api/stores/categories" // region: [],brandName: [], reservationTime: [] 데이터 받음
+          "http://localhost:8111/stores/categories" // region: [],brandName: [], reservationTime: [] 데이터 받음
         );
         console.log("카테고리목록 응답:", rsp.data);
         setCategories(rsp.data);
