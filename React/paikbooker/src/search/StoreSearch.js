@@ -5,12 +5,12 @@ const StoreSearch = ({ getDataFromServerAndUpdateStoreList }) => {
   const [categories, setCategories] = useState({
     region: [],
     brandName: [],
-    reservationTime: [],
+    // reservationTime: [],
   });
 
   const [regionValue, setRegionValue] = useState("");
   const [brandNameValue, setBrandNameValue] = useState("");
-  const [reservationTimeValue, setReservationTimeValue] = useState("");
+  const [reservationTimeValue, setReservationTimeValue] = useState([]);
 
   // 컴포넌트가 처음 레더링될 때 카테고리 목록을 가져옵니다.
   useEffect(() => {
@@ -28,6 +28,14 @@ const StoreSearch = ({ getDataFromServerAndUpdateStoreList }) => {
     };
 
     fetchCategories();
+
+    // 예약 시간을 리액트에서 생성
+    const generatedTimes = [];
+    for (let hour = 1; hour <= 12; hour++) {
+      const time1 = `${hour}:00`;
+      generatedTimes.push(time1); // 매 시각 정각 추가
+    }
+    setReservationTimeValue(generatedTimes);
   }, []);
 
   const handleSearchButtonClick = () => {
