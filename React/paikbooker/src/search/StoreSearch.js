@@ -10,33 +10,32 @@ const StoreSearch = ({ getDataFromServerAndUpdateStoreList }) => {
 
   const [regionValue, setRegionValue] = useState("");
   const [brandNameValue, setBrandNameValue] = useState("");
-  const [reservationTimeValue, setReservationTimeValue] = useState([]);
+  const [reservationTimeValue, setReservationTimeValue] = useState("");
 
-  // 컴포넌트가 처음 레더링될 때 카테고리 목록을 가져옵니다.
+  // 컴포넌트가 처음 렌더링될 때 카테고리 목록을 가져옵니다.
   useEffect(() => {
     const fetchCategories = async () => {
-      // 예외 발생시 그에 대한 대응 요구를 위해
       try {
         const rsp = await axios.get(
-          "http://localhost:8111/stores/categories" // region: [],brandName: [], reservationTime: [] 데이터 받음
+          "http://localhost:8111/stores/categories" // region, brandName만 받아옴
         );
-        console.log("카테고리목록 응답:", rsp.data);
-        setCategories(rsp.data);
+        console.log("카테고리 목록 응답:", rsp.data);
+        setCategories({
+          region: rsp.data.region || [],
+          brandName: rsp.data.brandName || [],
+        });
       } catch (error) {
-        console.error("카테고리 목록 가져오기 실패: ", error);
+        console.error("카테고리 목록 가져오기 실패:", error);
       }
     };
-
     fetchCategories();
-
-    // 예약 시간을 리액트에서 생성
-    const generatedTimes = [];
-    for (let hour = 1; hour <= 12; hour++) {
-      const time1 = `${hour}:00`;
-      generatedTimes.push(time1); // 매 시각 정각 추가
-    }
-    setReservationTimeValue(generatedTimes);
   }, []);
+
+  // 예약 시간은 리액트 내에서 하드코딩
+  const reservationTimes = Array.from({ length: 24 }, (_, index) => {
+    const hour = index + 1;
+    return `${hour}:00`; // 1:00, 2:00, ..., 24:00
+  });
 
   const handleSearchButtonClick = () => {
     // 검색 버튼 클릭 시 onSearchButtonClick의 하위 동작 중 하나
@@ -98,19 +97,19 @@ const StoreSearch = ({ getDataFromServerAndUpdateStoreList }) => {
           ))}
         </select>
 
+        {/* 예약 시간 선택 UI (하드코딩된 시간 목록) */}
         <select
           value={reservationTimeValue}
-          onChange={(e) => {
-            setReservationTimeValue(e.target.value);
-          }}
+          onChange={(e) => setReservationTimeValue(e.target.value)}
         >
           <option value="">예약 시간 선택</option>
-          {categories.reservationTime.map((item, index) => (
-            <option key={index} value={item}>
-              {item}
+          {reservationTimes.map((time, index) => (
+            <option key={index} value={time}>
+              {time}
             </option>
           ))}
         </select>
+
         <button onClick={handleSearchButtonClick}>검색</button>
       </div>
     </div>
