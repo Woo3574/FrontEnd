@@ -80,11 +80,11 @@ const HomeItemBlock = styled.div`
   }
 `;
 
-const HomeItem = ({ storeData }) => {
+const HomeItem = ({ dataReceivedAfterSearch }) => {
   // storeData가 유효한지 확인하고 빈 배열로 초기화
   const stores =
-    Array.isArray(storeData) && storeData.length > 0
-      ? storeData.reduce((acc, curr) => {
+    Array.isArray(dataReceivedAfterSearch) && dataReceivedAfterSearch.length > 0
+      ? dataReceivedAfterSearch.reduce((acc, curr) => {
           const brand = acc.find(
             (item) => item.brand.brandName === curr.brandName
           );
@@ -106,7 +106,7 @@ const HomeItem = ({ storeData }) => {
       : [];
 
   // 디버깅: storeData와 stores 확인
-  console.log("storeData 값 확인:", storeData);
+  console.log("storeData 값 확인:", dataReceivedAfterSearch);
   console.log("그룹화된 stores 값 확인:", stores);
 
   if (!stores || stores.length === 0) {
