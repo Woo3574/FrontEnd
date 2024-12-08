@@ -11,12 +11,6 @@ const Main = () => {
   const [reservationTime, setReservationTime] = useState("");
   const [region, setRegion] = useState("");
 
-  // // 조건 검색 후 받은 Data 목록
-  // const [brandLogo2, setBrandLogo2] = useState("");
-  // const [brandImg, setBrandImg] = useState("");
-  // const [storeName, setStoreName] = useState("");
-  // const [reviewAverage, setReviewAverage] = useState("");
-  // const [brandFood, setBrandFood] = useState("");
   
   // Main 화면 띄어주는 Component에 Data 전달 (조건 검색 후 받은 Data[])
   const [dataReceivedAfterSearch, setDataReceivedAfterSearch] = useState([]); // 검색된 매장들
@@ -29,24 +23,24 @@ const Main = () => {
   const getDataFromServerAndUpdateStoreList = useCallback(
     async (region, brandName, reservationTime) => {
       try {
-        console.log("검색 조건:", { region, brandName, reservationTime }); // 파라미터 확인
+        // console.log("검색 조건:", { region, brandName, reservationTime }); // 파라미터 확인
         // API 호출을 통해 조건에 맞는 데이터를 가져옵니다.
         const response = await axios.get(
           "http://localhost:8111/stores/search",
           {
+            // BackEnd에 넘길 검색 조건들
             params: {
               region: region,
               brandName: brandName,
               reservationTime: reservationTime,
-              // brandLogo2: brandLogo2,
-              // brandImg: brandImg,
-              // storeName: storeName,
-              // reviewAverage: reviewAverage,
-              // brandFood: brandFood,
             },
           }
         );
-        console.log(response.config.url);
+        // if (response.data && response.data.length > 0) {
+        //   console.log("검색된 매장들:", response.data);
+        // } else {
+        //   console.log("검색된 매장이 없습니다.");
+        // }
         setDataReceivedAfterSearch(response.data); // 검색된 매장들 상태 업데이트
       } catch (error) {
         console.error("검색 실패:", error);

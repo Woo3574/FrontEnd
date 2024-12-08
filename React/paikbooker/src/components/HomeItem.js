@@ -31,6 +31,7 @@ const HomeItemBlock = styled.div`
     width: 150px;
     height: 100px;
     background-size: contain;
+    
     background-repeat: no-repeat;
     background-position: center;
     background-color: #f1f1f1;
@@ -82,78 +83,70 @@ const HomeItemBlock = styled.div`
 
 const HomeItem = ({ dataReceivedAfterSearch }) => {
   // storeData가 유효한지 확인하고 빈 배열로 초기화
-  const stores =
-    Array.isArray(dataReceivedAfterSearch) && dataReceivedAfterSearch.length > 0
-      ? dataReceivedAfterSearch.reduce((acc, curr) => {
-          const brand = acc.find(
-            (item) => item.brand.brandName === curr.brandName
-          );
+  const stores = Array.isArray(dataReceivedAfterSearch) && dataReceivedAfterSearch.length > 0
+    ? dataReceivedAfterSearch.reduce((acc, curr) => {
+        const brand = acc.find(item => item.brand.brandName === curr.brandVO.brandName);
 
-          if (brand) {
-            brand.stores.push(curr);
-          } else {
-            acc.push({
-              brand: {
-                brandLogo: curr.brandLogo,
-                brandName: curr.brandName,
-              },
-              stores: [curr],
-            });
-          }
+        if (brand) {
+          brand.stores.push(curr); // 기존 브랜드에 매장을 추가
+        } else {
+          acc.push({
+            brand: curr.brandVO, // 새로운 브랜드가 나오면 브랜드 정보를 추가
+            stores: [curr]
+          });
+        }
 
-          return acc;
-        }, [])
-      : [];
+        return acc;
+      }, [])
+    : [];
 
-  // 디버깅: storeData와 stores 확인
-  console.log("storeData 값 확인:", dataReceivedAfterSearch);
-  console.log("그룹화된 stores 값 확인:", stores);
+  // 브랜드 순서를 거꾸로 뒤집기
+  const reversedStores = stores.reverse();
 
-  if (!stores || stores.length === 0) {
+  if (!reversedStores || reversedStores.length === 0) {
     return <div>No stores available</div>; // 데이터가 없을 경우 처리
   }
 
   return (
     <HomeItemBlock>
       <div className="container">
-        {stores.length > 0 ? (
-          stores.map((brandData) => (
-            <div key={brandData.brand.brandLogo} className="brandWrapper">
-              {/* 브랜드 로고 */}
-              <div className="brand">
-                <div
-                  className="brandLogo"
-                  style={{
-                    backgroundImage: `url(${brandData.brand.brandLogo})`, // 브랜드 로고 설정
-                  }}
-                ></div>
-              </div>
+        {reversedStores.map((brandData) => (
+          <div key={brandData.brand.brandName} className="brandWrapper">
+            {/* 브랜드 로고 */}
+            <div className="brand">
+              <div
+                className="brandLogo"
+                style={{
+                  backgroundImage: `url(${brandData.brand.brandLogo2})`, // 브랜드 로고 설정
+                }}
+              ></div>
+            </div>
 
-              {/* 해당 브랜드의 매장 목록 */}
-              <div className="stores">
-                {brandData.stores.map((store) => (
-                  <div key={store.storeNo} className="storeBox">
-                    <div
-                      className="storeBoxUp"
-                      style={{
-                        backgroundImage: `url(${store.storeImg})`, // 매장 이미지 설정
-                      }}
-                    ></div>
-                    <div className="storeBoxDown">
-                      <div className="boxDTextUp">{store.storeName}</div>
-                      <div className="boxDTextDown">{store.storeAddr}</div>
+            {/* 해당 브랜드의 매장 목록, 가로로 나열 */}
+            <div className="stores">
+              {brandData.stores.map((store) => (
+                <div key={store.storeNo} className="storeBox">
+                  <div
+                    className="storeBoxUp"
+                    style={{
+                      backgroundImage: `url(${brandData.brand.brandImg})`, // 매장 이미지 설정
+                    }}
+                  ></div>
+                  <div className="storeBoxDown">
+                    <div className="boxDTextUp">{store.storeName}</div>
+                    <div className="boxDTextDown">
+                      {store.brandVO.brandFood}ㆍ{store.storeAddr}
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
-          ))
-        ) : (
-          <div>No stores available</div> // 매장이 없을 때 메시지 표시
-        )}
+          </div>
+        ))}
       </div>
     </HomeItemBlock>
   );
 };
 
 export default HomeItem;
+
