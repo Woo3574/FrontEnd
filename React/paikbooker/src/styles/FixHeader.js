@@ -22,7 +22,6 @@ const Hdiv1 = styled.div`
   flex-direction: row;
   justify-content: space-between; /* 양쪽 끝으로 배치 */
   align-items: center; /* 세로 가운데 정렬 */
-
   img {
     height: 50px;
   }
@@ -37,7 +36,7 @@ const Hdiv1_L = styled.div`
 `;
 
 const Hdiv1_R = styled.div`
-  margin-right: 30px;
+  margin-right: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -127,6 +126,7 @@ const FixHeader = ({ getDataFromServerAndUpdateStoreList }) => {
               }
             />
           </SearchBox>
+
         </Hdiv2>
         <Hdiv3>
           <div>

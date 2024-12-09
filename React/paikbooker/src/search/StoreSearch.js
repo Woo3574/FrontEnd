@@ -1,5 +1,29 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
+
+const Button = styled.button`
+  width: 40px; /* 원의 너비 */
+  height: 40px; /* 원의 높이 */
+  background-color: black; /* 원의 배경색 */
+  border-radius: 50%; /* 둥근 모양 */
+  border: none; /* 기본 버튼 테두리 제거 */
+  outline: none; /* 포커스 시 나타나는 테두리 제거 */
+  background-image:url(https://firebasestorage.googleapis.com/v0/b/photo-island-eeaa3.firebasestorage.app/o/PAIKBOOKER_BRAND_IMG%2Fsearh.png?alt=media&token=cbfec402-d857-4edc-be0c-a8434cd526fb); /* 동적으로 이미지 경로 설정 */
+  background-size: 20px 20px; /* 이미지 크기 맞춤 */
+  background-position: center; /* 이미지 위치 */
+  background-repeat: no-repeat; /* 이미지가 반복되지 않도록 설정 */
+  cursor: pointer; /* 클릭 가능한 포인터 */
+
+  /* 호버 및 클릭 시 효과 */
+  &:hover {
+    opacity: 0.8; /* 호버 효과 */
+  }
+
+  &:active {
+    transform: scale(0.95); /* 클릭 시 살짝 축소 */
+  }
+`;
 
 const StoreSearch = ({ getDataFromServerAndUpdateStoreList }) => {
   const [categories, setCategories] = useState({
@@ -110,7 +134,7 @@ const StoreSearch = ({ getDataFromServerAndUpdateStoreList }) => {
           ))}
         </select>
 
-        <button onClick={handleSearchButtonClick}>검색</button>
+        <Button onClick={handleSearchButtonClick} />
       </div>
     </div>
   );
