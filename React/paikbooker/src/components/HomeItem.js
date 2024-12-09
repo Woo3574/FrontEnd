@@ -135,7 +135,9 @@ const HomeItem = ({ dataReceivedAfterSearch }) => {
                   <div className="storeBoxDown">
                     <div className="boxDTextUp">{store.storeName}</div>
                     <div className="boxDTextDown">
-                      {store.brandVO.brandFood}ㆍ{store.storeAddr}
+                     <p style={{ color: 'RED', display: 'inline' }}>★ </p>
+                     <p style={{ display: 'inline' }}>{store.reviewVO.rvAverage}</p>
+                     <p style={{ color: '#a4a4a4', display: 'inline', fontSize: "13px" }}>  {store.brandVO.brandFood}ㆍ{store.storeAddr}</p>
                     </div>
                   </div>
                 </div>
