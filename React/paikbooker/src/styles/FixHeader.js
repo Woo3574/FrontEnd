@@ -11,7 +11,6 @@ const Header = styled.header`
   top: 0;
   left: 0;
   z-index: 1000; /* 다른 요소들 위에 표시되도록 설정 */
-
   background-color: #fff; /* 배경 색 */
 `;
 

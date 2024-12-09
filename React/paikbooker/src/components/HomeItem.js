@@ -65,61 +65,46 @@ const SortBy = styled.div`
     transform-origin: 50% 50%;
   }
 
- /* 첫 번째 span - 초기 회전 상태 */
-button span:nth-child(1) {
-  /* 그림자 효과 */
-  box-shadow:
-    -7px -7px 20px 0px #fff9,  /* 상단 왼쪽 그림자 */
-    -4px -4px 5px 0px #fff9,   /* 상단 왼쪽 작은 그림자 */
-    7px 7px 20px 0px #0002,    /* 하단 오른쪽 그림자 */
-    4px 4px 5px 0px #0001;     /* 하단 오른쪽 작은 그림자 */
-
-  /* 3D 회전: Y축을 기준으로 90도 회전 */
+  /* First span - initial rotation state */
+  button span:nth-child(1) {
+    box-shadow:
+    -7px -7px 20px 0px #fff9,
+   -4px -4px 5px 0px #fff9,
+   7px 7px 20px 0px #0002,
+   4px 4px 5px 0px #0001;
   -webkit-transform: rotateX(90deg);
   -moz-transform: rotateX(90deg);
   transform: rotateX(90deg);
-
-  /* 변형의 기준점 설정: 중앙에서 -20px 깊이 */
   -webkit-transform-origin: 50% 50% -20px;
   -moz-transform-origin: 50% 50% -20px;
   transform-origin: 50% 50% -20px;
+    transform: rotateX(90deg); /* Initially rotated vertically */
+  }
 
-  /* 처음에는 수직으로 90도 회전된 상태로 보이도록 설정 */
-  transform: rotateX(90deg); 
-}
-
-/* 두 번째 span - 처음에 보이는 상태 */
-button span:nth-child(2) {
-  /* 3D 회전: Y축을 기준으로 0도로 설정하여 수평 상태로 보이도록 함 */
-  -webkit-transform: rotateX(0deg);
+  /* Second span - initially in view */
+  button span:nth-child(2) {
+    -webkit-transform: rotateX(0deg);
   -moz-transform: rotateX(0deg);
   transform: rotateX(0deg);
-
-  /* 변형의 기준점 설정: 중앙에서 -20px 깊이 */
   -webkit-transform-origin: 50% 50% -20px;
   -moz-transform-origin: 50% 50% -20px;
   transform-origin: 50% 50% -20px;
-}
+  }
 
-/* hover 상태 (버튼에 마우스를 올렸을 때) */
-button:hover span:nth-child(1) {
-  /* 첫 번째 span이 마우스를 올렸을 때 회전이 풀려서 보이게 됨 */
-  -webkit-transform: rotateX(0deg);
+  /* Hover state */
+  button:hover span:nth-child(1) {
+    -webkit-transform: rotateX(0deg);
   -moz-transform: rotateX(0deg);
   transform: rotateX(0deg);
 }
-
-button:hover span:nth-child(2) {
-  /* 두 번째 span의 배경을 변경하고 회전하여 숨김 */
-  background: #e0e5ec;  /* 배경색을 회색으로 변경 */
-  color: #e0e5ec;        /* 글자 색도 회색으로 변경 */
   
-  /* 3D 회전: Y축을 기준으로 -90도 회전하여 보이지 않게 됨 */
+  button:hover span:nth-child(2) {
+    background: #e0e5ec;
+  color: #e0e5ec;
   -webkit-transform: rotateX(-90deg);
   -moz-transform: rotateX(-90deg);
   transform: rotateX(-90deg);
-}
-
+  }
 `;
 
 const HomeItemBlock = styled.div`
@@ -177,7 +162,7 @@ const HomeItemBlock = styled.div`
   .storeBoxUp {
     width: 100%;
     height: 215px;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-color: #f1f1f1;
