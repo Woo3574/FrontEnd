@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-pascal-case */
 import styled from "styled-components";
-import StoreSearch from "../search/StoreSearch";
+import StoreSearch from "../pages/stores/StoreSearch"
 
 const Header = styled.header`
   width: 1920px;
