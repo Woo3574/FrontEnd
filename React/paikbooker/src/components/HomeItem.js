@@ -291,7 +291,7 @@ const HomeItem = ({ dataReceivedAfterSearch }) => {
                       <div className="boxDTextUp">{store.storeName}</div>
                       <div className="boxDTextDown">
                         <p style={{ color: "RED", display: "inline" }}>★ </p>
-                        <p style={{ display: "inline" }}>{store.reviewVO.rvAverage}</p>
+                        <p style={{ display: "inline" }}>{store.avgRatingVO.averageRating}</p>
                         <p
                           style={{
                             color: "#a4a4a4",
