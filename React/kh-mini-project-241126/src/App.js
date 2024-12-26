@@ -8,6 +8,7 @@ import Signup from "./pages/signup/Signup";
 import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import ChatList from "./pages/chatting/ChatList";
+import ChatRoomCreate from "./pages/chatting/ChatRoomCreate";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route element={<Layout />}>
               <Route path="/home" element={<Home />}></Route>
               <Route path="/chat" element={<ChatList/>}></Route>
+              <Route path="/chat-create" element={<ChatRoomCreate/>}></Route>
             </Route>
           </Routes>
         </Router>
