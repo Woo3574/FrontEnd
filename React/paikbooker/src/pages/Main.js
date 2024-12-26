@@ -3,6 +3,7 @@ import HomeItem from "../components/HomeItem";
 import GlobalStyle from "../styles/GlobalStyle";
 import { useCallback, useState, useEffect } from "react";
 import axios from "axios";
+import Brand1 from "./headerStores/Brand1";
 
 const Main = () => {
 
@@ -62,6 +63,7 @@ const Main = () => {
       {/* 디버깅용 상태 출력 */}
       {console.log("현재 stores 상태:", dataReceivedAfterSearch)}
       <HomeItem dataReceivedAfterSearch={dataReceivedAfterSearch} />
+      <Brand1 dataReceivedAfterSearch={dataReceivedAfterSearch}/>
     </>
   );
 };

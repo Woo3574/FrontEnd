@@ -162,7 +162,7 @@ const HomeItemBlock = styled.div`
   .storeBoxUp {
     width: 100%;
     height: 215px;
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     background-color: #f1f1f1;
@@ -223,7 +223,7 @@ const HomeItem = ({ dataReceivedAfterSearch }) => {
       } else if (sortType === "name") {
         sortedStores.sort((a, b) => a.storeName.localeCompare(b.storeName));
       } else if (sortType === "rating") {
-        sortedStores.sort((a, b) => b.reviewVO.rvAverage - a.reviewVO.rvAverage);
+        sortedStores.sort((a, b) => b.avgRatingVO.averageRating - a.avgRatingVO.averageRating);
       }
 
       return { ...brandData, stores: sortedStores };

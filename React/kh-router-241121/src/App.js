@@ -13,6 +13,7 @@ import Setting from "./pages/Setting";
 import ImageUploader from "./pages/ImgUploader";
 import MaterialExample from "./pages/MaterialEx";
 import CardExample from "./pages/CardEx";
+import UseMemoComparison from "./pages/Home";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
             {/* <Route path="/" element={<Login />} /> */}
             {/* 중첩Route */}
             <Route element={<Layout />}>
-              <Route path="/home" element={<Home />} />
+              <Route path="/home" element={<UseMemoComparison />} />
               <Route path="/about" element={<About />} />
               <Route path="/profile/:username" element={<Profiles />} />
               <Route path="articles" element={<Articles />} />

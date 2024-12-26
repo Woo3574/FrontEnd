@@ -1,33 +1,38 @@
-import { Link } from "react-router-dom";
-import { UserContext } from "../context/UserStore";
-import { useContext } from "react";
-import styled from "styled-components";
+import React, { useState, useMemo } from "react";
 
-const Container = styled.div`
-  background-color: ${(props) => props.color};
-`;
+function UseMemoComparison() {
+  const [count, setCount] = useState(0);
+  const [text, setText] = useState("");
 
-const Home = () => {
-  const { userId, password, color } = useContext(UserContext);
+  // 의도적으로 느리게 만든 계산 함수
+  const slowCalculation = (num) => {
+    console.log("🔥 느린 계산 실행...");
+    for (let i = 0; i < 1000000000; i++) {} // CPU 소모 작업
+    return num * 2;
+  };
+
+  // 1️⃣ useMemo 사용
+  const memoizedValue = useMemo(() => slowCalculation(count), [count]);
+
+  // 2️⃣ useMemo 미사용
+  const nonMemoizedValue = slowCalculation(count);
+
   return (
-    <>
-      <Container color={color}>
-        <h1>여기는 홈 입니다.</h1>
-        <p>가장 먼저 보이는 페이지 입니다.</p>
-        <Link to="/about">소개 페이지로 이동</Link>
-        <br />
-        <Link to="/profile/frontend">Frontend 프로필 </Link>
-        <br />
-        <Link to="/profile/backend">Backend 프로필 </Link>
-        <br />
-        <Link to="/profile/dba">DBA 프로필 </Link>
-        <br />
-        <Link to="/articles">게시판 목록</Link>
-        <p>아이디: {userId}</p>
-        <p>패스워드: {password}</p>
-      </Container>
-    </>
+    <div>
+      <h1>UseMemo vs Non-UseMemo</h1>
+      <div>
+        <h2>1️⃣ useMemo 사용 결과: {memoizedValue}</h2>
+        <h2>2️⃣ useMemo 미사용 결과: {nonMemoizedValue}</h2>
+      </div>
+      <button onClick={() => setCount(count + 1)}>카운트 증가</button>
+      <input
+        type="text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="텍스트 입력"
+      />
+    </div>
   );
-};
+}
 
-export default Home;
+export default UseMemoComparison;
