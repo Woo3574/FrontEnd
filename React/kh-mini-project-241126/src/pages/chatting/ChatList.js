@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import AxiosApi from "../../api/AxiosApi";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import Commons from "../../utils/Common"
 
 const ChatListContainer = styled.div`
   padding: 30px;
@@ -122,7 +123,7 @@ const ChatList = () => {
         {chatRooms.map(room => (
           <ChatRoom key={room.roomId} onClick={()=>enterChatRoom(room.roomId)}>
             <ChatName>{room.name}</ChatName>
-            <p>{room.regDate}</p>
+           <ChatDate>{Commons.formatDate(room.regDate)}</ChatDate>
           </ChatRoom>
         ))}
       </ChatUl>
