@@ -1,5 +1,5 @@
 import moment from "momnet"; // 시간을 경과 시간 형태로 표시
-import "momnet/local/ko";
+import "momnet/locale/ko";
 moment.locale("ko") // 한국 시간 적용 
 
 const Commons = {

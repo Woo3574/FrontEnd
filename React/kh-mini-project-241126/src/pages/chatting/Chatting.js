@@ -1,9 +1,9 @@
-import React, {useState, useEffect, useRef} from "react";
-import AxiosApi from "../../api/AxiosApi";
+import React, { useState, useEffect, useRef } from "react";
+// import { KH_SOCKET_URL } from "../../utils/Common";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useNavigate, useParams } from "react-router-dom";
+import AxiosApi from "../../api/AxiosApi";
 import Commons from "../../utils/Common";
-import { type } from "@testing-library/user-event/dist/type";
 
 const ChatContainer = styled.div`
   padding: 20px;
@@ -81,54 +81,142 @@ const Chatting = () => {
   const [socketConnected, setSocketConnected] = useState(false); // 웹소켓 연결 여부
   const [inputMsg, setInputMsg] = useState(""); // 입력 메세지
   const [chatList, setChatList] = useState([]); // 채팅 글 목록
-  const {roomId} = useParams(); // 채팅방 번호, 새로운 방 개설, 기존의 방에 대한 진입
+  const { roomId } = useParams(); // 채팅방 번호 / 새로운 방 개설/ 기존의 방에 대한 진입
   const [sender, setSender] = useState(""); // 보낸 사람
   const [roomName, setRoomName] = useState(""); // 채팅방 이름
-  const ws = useRef(null); // 웹소켓 객체 생성, 소켓 연결 정보를 유지 해야 하짐나 렌더링과는 무관
-  const navigate = useNavigate(); // 페이지 이동
-  const email = localStorage.getItem("email");
+  const ws = useRef(null); //웹소켓 객체 생성; 소켓 연결 정보를 유지해야하지만 렌더링과는 무관.
+  const navigate = useNavigate(); // useNavigate 훅 추가 ; 페이지 이동
+  const email = window.localStorage.getItem("email");
 
-  const onChangeMsg = e => {
+  const onChangMsg = (e) => {
     setInputMsg(e.target.value);
-  }
+  };
 
-  const onClickMsgSend = e=> {
+  const onClickMsgSend = (e) => {
     // 메세지 전송
-    ws.current.send (
+    ws.current.send(
       JSON.stringify({
-          type: "TALK",
-          room: roomId,
-          sender: sender,
-          message: inputMsg,
+        type: "TALK",
+        roomId: roomId,
+        sender: sender,
+        message: inputMsg,
       })
     );
     setInputMsg(""); // 전송 이후 입력창 지우기
   };
 
-  const onEnterKey = e => {
-    // 엔터키 입력 시, 공백 제거 후 비어있지 않으면 
+  const onEnterKey = (e) => {
+    //엔터키 입력 시 공백 제거 후 비어있지 않으면 전송
     if (e.key === "Enter" && inputMsg.trim() !== "") {
       e.preventDefault(); // 기존 이벤트 무시
       onClickMsgSend(e);
     }
   };
 
-  // 채팅 종료
+  //채팅 종료
   const onClickMsgClose = () => {
-    ws.current.send (
+    // 메세지 전송
+    ws.current.send(
       JSON.stringify({
-          type: "CLOSE",
-          room: roomId,
-          sender: sender,
-          message: inputMsg,
+        type: "CLOSE",
+        roomId: roomId,
+        sender: sender,
+        message: "종료 합니다.",
       })
     );
     ws.current.close();
-    navigate("/chat")
+    navigate("/chat"); //닫고 나서 채팅목록으로 이동
   };
 
-  useEffect(()=> {
-    
-  })
+  // 이메일로 회원 정보 가져 오기
+  useEffect(() => {
+    const getMember = async () => {
+      try {
+        const rsp = await AxiosApi.memberInfo(email);
+        console.log(rsp.data.name);
+        setSender(rsp.data.name);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getMember();
+  }, []);
 
-}
+  // 채팅방 정보 가져 오기
+  useEffect(() => {
+    const getChatRoom = async () => {
+      try {
+        const rsp = await AxiosApi.chatDetail(roomId);
+        console.log(rsp.data.name);
+        setRoomName(rsp.data.name);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getChatRoom();
+  }, []);
+
+  // 웹 소켓 연결 하기
+  useEffect(() => {
+    console.log("방번호 : " + roomId);
+    if (!ws.current) {
+      // ws.current = new WebSocket(KH_SOCKET_URL);
+      ws.current = new WebSocket("ws://localhost:8111/ws/chat");
+      ws.current.onopen = () => {
+        // console.log("connected to " + KH_SOCKET_URL);
+        setSocketConnected(true);
+      };
+    }
+    if (socketConnected) {
+      ws.current.send(
+        JSON.stringify({
+          type: "ENTER",
+          roomId: roomId,
+          sender: sender,
+          message: "처음으로 접속 합니다.",
+        })
+      );
+    }
+    // 메세지가 들어올 때 마다 자동 감지
+    ws.current.onmessage = (msg) => {
+      const data = JSON.parse(msg.data);
+      console.log(data.message);
+      setChatList((prevItems) => [...prevItems, data]); //기존 채팅 리스트에 새로운 메세지 추가
+    };
+  }, [socketConnected]);
+
+  // 화면 하단으로 자동 스크롤
+  const chatContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
+    }
+  }, [chatList]);
+
+  return (
+    <ChatContainer>
+      <ChatHeader>채팅방 {roomName}</ChatHeader>
+      <MessagesContainer ref={chatContainerRef}>
+        {chatList.map((chat, index) => (
+          <Message key={index} isSender={chat.sender === sender}>
+            {`${chat.sender} > ${chat.message}`}
+          </Message>
+        ))}
+      </MessagesContainer>
+      <div>
+        <Input
+          placeholder="문자 전송"
+          value={inputMsg}
+          onChange={onChangMsg}
+          onKeyUp={onEnterKey}
+        />
+        <SendButton onClick={onClickMsgSend}>전송</SendButton>
+      </div>
+      <CloseButton onClick={onClickMsgClose}>채팅 종료 하기</CloseButton>
+    </ChatContainer>
+  );
+};
+
+export default Chatting;
