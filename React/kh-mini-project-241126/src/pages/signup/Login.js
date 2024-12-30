@@ -47,15 +47,24 @@ const Login = () => {
   const onClickLogin = async () => {
     try {
       const rsp = await AxiosApi.login(inputEmail, inputPw);
-      localStorage.setItem("email", inputEmail);
-      localStorage.setItem("isLogin", "TRUE");
-      console.log(rsp.data);
-      if (rsp.data) {
+      // 토큰 발행하면서 주고받는 값이 달라져서 삭제
+      // localStorage.setItem("email", inputEmail);
+      // localStorage.setItem("isLogin", "TRUE");
+      if (rsp.data.grantType === "Bearer") { // 인증방식 : Bearer
+        console.log("액세스 토큰 : ", rsp.data.accessToken);
+        console.log("리프레쉬 토큰 : ", rsp.data.refreshToken);
         navigate("/home");
       } else {
         setModalOpen(true);
         setModalContent("아이디 또는 패스워드가 일치 하지 않습니다.");
       }
+      /* console.log(rsp.data);
+      if (rsp.data) {
+        navigate("/home");
+      } else {
+        setModalOpen(true);
+        setModalContent("아이디 또는 패스워드가 일치 하지 않습니다.");
+      } */
     } catch (e) {
       setModalOpen(true);
       setModalContent("서버가 응답하지 않습니다.");

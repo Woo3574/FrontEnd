@@ -2,6 +2,7 @@ import axios from "axios";
 const KH_DOMAIN = "http://localhost:8111";
 
 const AxiosApi = {
+  // 로그인
   login: async (email, pw) => {
     console.log("이메일 : ", email);
     console.log("패스워드 : ", pw);
@@ -11,9 +12,11 @@ const AxiosApi = {
     };
     return await axios.post(KH_DOMAIN + "/auth/login", login);
   },
+  // 가입여부 확인
   regCheck: async (email) => {
     return await axios.get(KH_DOMAIN + `/auth/exists/${email}`);
   },
+  // 회원 가입
   signup: async (email, pwd, name) => {
     console.log("이메일 : ", email);
     console.log("패스워드 : ", pwd);
