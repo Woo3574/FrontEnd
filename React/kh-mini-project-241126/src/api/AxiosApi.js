@@ -1,4 +1,6 @@
 import axios from "axios";
+import AxiosInstance from "./AxiosInstance";
+
 const KH_DOMAIN = "http://localhost:8111";
 
 const AxiosApi = {
@@ -31,7 +33,8 @@ const AxiosApi = {
   },
   // 전체 회원 조회
   memberList: async () => {
-    return await axios.get(KH_DOMAIN + "/member/list");
+    // return await axios.get(KH_DOMAIN + "/member/list");
+    return await AxiosInstance.get(`/member/list`);
   },
   // 개별 회원 조회
   memberInfo: async (email) => {
