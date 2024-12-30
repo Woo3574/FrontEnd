@@ -7,6 +7,7 @@ import Input from "../../components/InputComponent";
 import { Container, Items } from "../../components/SignupComponent";
 import AxiosApi from "../../api/AxiosApi";
 import Modal from "../../utils/Modal";
+import Commons from "../../utils/Common";
 
 const Img = styled.img`
   width: 180px;
@@ -53,6 +54,8 @@ const Login = () => {
       if (rsp.data.grantType === "Bearer") { // 인증방식 : Bearer
         console.log("액세스 토큰 : ", rsp.data.accessToken);
         console.log("리프레쉬 토큰 : ", rsp.data.refreshToken);
+        Commons.setAccessToken(rsp.data.accessToken);
+        Commons.setRefreshToken(rsp.data.refreshToken);
         navigate("/home");
       } else {
         setModalOpen(true);

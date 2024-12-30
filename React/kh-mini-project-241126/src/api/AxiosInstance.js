@@ -29,7 +29,7 @@ AxiosInstance.interceptors.response.use(
       const newToken = await Commons.handleUnauthorized();
       if (newToken) {
         // 원래 하고자 했던 요청을 다시 시도
-        error.config.headers.Authorization = `Bearer ${Commons.getAccessToken}`
+        error.config.headers.Authorization = `Bearer ${Commons.getAccessToken()}`;
         return AxiosInstance.request(error.config);
       }
     }

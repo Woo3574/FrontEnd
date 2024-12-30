@@ -38,7 +38,7 @@ const Commons = {
     const accessToken = Commons.getAccessToken();
     const refreshToken = Commons.getRefreshToken();
     const config = {
-      Headers: {
+      headers: {
         Authorization: `Bearer ${accessToken}`
       },
     };
