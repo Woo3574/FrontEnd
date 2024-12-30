@@ -1,6 +1,6 @@
 import axios from "axios";
-import moment from "momnet"; // 시간을 경과 시간 형태로 표시
-import "momnet/locale/ko";
+import moment from "moment"; // 시간을 경과 시간 형태로 표시
+import "moment/locale/ko";
 moment.locale("ko") // 한국 시간 적용 
 
 const Commons = {

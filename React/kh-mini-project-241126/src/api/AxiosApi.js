@@ -1,5 +1,6 @@
 import axios from "axios";
 import AxiosInstance from "./AxiosInstance";
+import Commons from "../utils/Common";
 
 const KH_DOMAIN = "http://localhost:8111";
 
@@ -12,7 +13,8 @@ const AxiosApi = {
       email: email,
       pwd: pw,
     };
-    return await axios.post(KH_DOMAIN + "/auth/login", login);
+    // return await axios.post(KH_DOMAIN + "/auth/login", login);
+    return await AxiosInstance.post("/auth/login", login);
   },
   // 가입여부 확인
   regCheck: async (email) => {
@@ -38,7 +40,9 @@ const AxiosApi = {
   },
   // 개별 회원 조회
   memberInfo: async (email) => {
-    return await axios.get(KH_DOMAIN + `/member/${email}`);
+    // return await axios.get(KH_DOMAIN + `/member/${email}`);
+    console.log(Commons.getAccessToken());
+    return await AxiosInstance.get(`/member/${email}`);
   },
   // 채팅방 목록 가져오기
   chatList: async () => {
